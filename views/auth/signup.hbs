@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row">
+        {{ message }}
+        <div class="col-sm-6 centered-form">
+            <form action="/signup" method="post">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input id="username" type="text" name="username" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" type="text" name="email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input id="password" type="password" name="password" class="form-control">
+                </div>
+                <div class="form-group">
+                    <p>Role:</p>
+                    <label for="wo">wo:</label>
+                    <input id="WO" type="radio" name="role" class="form-control" value="WO" checked="checked">
+                    <label for="Translator">Translator:</label>
+                    <input id="Translator" type="radio" name="role" class="form-control" value="Translator"> {{!--
+                    <label for="Professional">professional:</label>
+                    <input id="Professional" type="radio" name="Professional" class="form-control"> --}}
+                </div>
+
+                <button type="submit">Signup</button>
+            </form>
+        </div>
+    </div>
+</div>
