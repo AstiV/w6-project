@@ -1,40 +1,49 @@
 <h1>Edit your Profile</h1>
 
-{{#if translator}}
+{{#if translator}} {{translator}}
+
 <form action="/profile/edit" method="post">
     <div class="form-group">
         <label for="username">Username</label>
         <input id="username" type="text" name="username" class="form-control">
+        <span class="current-value">Current Username: {{translator.user.username}}</span>
     </div>
 
     <div class="form-group">
-        <p>Role:</p>
+        <p>Role</p>
         <label for="Volunteer">Volunteer</label>
         <input id="Volunteer" type="radio" name="role" class="form-control" value="Volunteer" checked="checked">
         <label for="Professional">Professional</label>
-        <input id="Professional" type="radio" name="role" class="form-control" value="Professional">
+        <input id="Professional" type="radio" name="role" class="form-control" value="Professional"> {{#if translator.role}}
+        <br>
+        <span class="current-value">Current Role: {{translator.role}}</span>
+        {{/if}}
     </div>
 
     {{#if translator.price}}
     <div class="form-group">
         <label for="price">Fee in € per hour</label>
         <input id="price" type="number" name="price" class="form-control">
+        <span class="current-value">Current Fee: € {{translator.price}}</span>
     </div>
     {{/if}}
 
     <div class="form-group">
         <label for="email">E-Mail</label>
         <input id="email" type="text" name="email" class="form-control">
+        <span class="current-value">Current E-Mail: {{translator.user.email}}</span>
     </div>
 
     <div class="form-group">
         <label for="telephone">Phone Number</label>
         <input id="telephone" type="tel" name="telephone" class="form-control" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+        <span class="current-value">Current Phone Number: {{translator.telephone}}</span>
     </div>
 
     <div class="form-group">
         <label for="location">Location</label>
         <input id="location" type="text" name="location" class="form-control">
+        <span class="current-value">Current Location: {{translator.location}}</span>
     </div>
 
     <div class="form-group">
@@ -54,12 +63,14 @@
     <div class="form-group">
         <label for="background">Background</label>
         <input id="background" type="text" name="background" class="form-control">
+        <span class="current-value">Current Background: {{translator.background}}</span>
     </div>
 
     <div class="form-group">
         <label for="preferedSetting">Preferred Setting</label>
         {{!-- <input id="preferedSetting" type="text" name="preferedSetting" class="form-control"> --}}
         <textarea cols="50" rows="3" placeholder="Describe your setting preferences here..."></textarea>
+        <span class="current-value">Current Setting Preferences: {{translator.preferedSetting}}</span>
     </div>
 
 
