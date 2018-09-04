@@ -3,6 +3,7 @@ const router = express.Router();
 const { ensureLoggedIn, ensureLoggedOut } = require("connect-ensure-login");
 const Translator = require("../models/Translator");
 const WO = require("../models/WO");
+const User = require("../models/User");
 
 //use this middleware at every request to check if user is logged in
 router.use((req, res, next) => {
@@ -56,26 +57,45 @@ router.get("/edit", (req, res) => {
 });
 router.post("/edit", (req, res) => {
   //TODO implement overwriting of db data
+  console.log(req.body);
   const { id } = req.user;
   const dataFromForm = req.body;
   const fields = Object.keys(dataFromForm);
-  let filledFields = {};
+  // let filledFields = {};
+  let userModelFields = {};
+  let translatorModelFields = {};
   fields.forEach((field, ind, arr) => {
     if (dataFromForm[field].length > 0) {
-      filledFields[field] = dataFromForm[field];
+      if (field === "username" || field === "email") {
+        userModelFields[field] = dataFromForm[field];
+      } else {
+        translatorModelFields[field] = dataFromForm[field];
+      }
     }
   });
+  console.log(userModelFields);
 
   Translator.findOneAndUpdate(
     { user: id },
-    { $set: filledFields },
+    { $set: translatorModelFields },
     { new: true },
     function(err, doc) {
       if (err) {
-        console.log("Something wrong when updating data!");
+        console.log("Something wrong when updating translator model data!");
       }
-      res.redirect("/profile/show");
       console.log(doc);
+      User.findOneAndUpdate(
+        { _id: id },
+        { $set: userModelFields },
+        { new: true },
+        function(err, doc) {
+          console.log(doc);
+          if (err) {
+            console.log("Something wrong when updating user model data!");
+          }
+          res.redirect("/profile/show");
+        }
+      );
     }
   );
 });
