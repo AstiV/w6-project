@@ -50,6 +50,32 @@ router.get("/edit", (req, res) => {
 });
 router.post("/edit", (req, res) => {
   //TODO implement overwriting of db data
+  const { id } = req.user;
+  const dataFromForm = req.body;
+  const fields = Object.keys(dataFromForm);
+  let filledFields = [];
+  fields.forEach((field, ind, arr) => {
+    let notEmptyField = {};
+    notEmptyField[field] = dataFromForm[field];
+    if (dataFromForm[field].length > 0) {
+      filledFields.push(notEmptyField);
+    }
+  });
+  filledFields = filledFields[0];
+
+  // console.log("id", id);
+  Translator.findOneAndUpdate(
+    { user: id },
+    { $set: filledFields },
+    { new: true },
+    function(err, doc) {
+      if (err) {
+        console.log("Something wrong when updating data!");
+      }
+
+      console.log(doc);
+    }
+  );
 });
 
 module.exports = router;
