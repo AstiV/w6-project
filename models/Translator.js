@@ -1,9 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-// const Location = require("./Location");
-// const Meeting = require("./Meeting");
-// const User = require("./User");
-// const Language = require("./Language");
 
 const translatorSchema = Schema({
   loginData: {
@@ -13,16 +9,15 @@ const translatorSchema = Schema({
   profileImageUrl: {
     type: String
   },
-  //   role: {
-  //     type: String,
-  //     enum: ["Volunteer", "Professional"],
-  //     required: true
-  //   },
-  //   location: { type: Schema.Types.ObjectId, ref: "Location" },
+  role: {
+    type: String,
+    enum: ["Volunteer", "Professional"]
+  },
+  location: String,
   telephone: String,
   languages: [
     {
-      language: { type: Schema.Types.ObjectId, ref: "Language" },
+      language: String,
       level: { type: String, enum: ["A1", "A2", "B1", "B2", "C1", "C2"] }
     }
   ],
@@ -36,7 +31,7 @@ const translatorSchema = Schema({
   //       status: { type: String, enum: ["confirmed", "waiting", "cancelled"] }
   //     }
   //   ],
-  prefferedSetting: Array //for example doesn't want to work with people who went through specific experiences
+  preferedSetting: Array //for example doesn't want to work with people who went through specific experiences
 });
 
 const Translator = mongoose.model("Translator", translatorSchema);
