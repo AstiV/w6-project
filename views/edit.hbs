@@ -15,10 +15,12 @@
         <input id="Professional" type="radio" name="role" class="form-control" value="Professional">
     </div>
 
+    {{#if translator.price}}
     <div class="form-group">
         <label for="price">Fee in € per hour</label>
         <input id="price" type="number" name="price" class="form-control">
     </div>
+    {{/if}}
 
     <div class="form-group">
         <label for="email">E-Mail</label>
