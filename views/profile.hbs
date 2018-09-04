@@ -1,9 +1,11 @@
 {{#if translator}}
 <h1>Translator Profile</h1>
 
+{{#if translator.profileImageUrl}}
 <div class="profile-img">
     <img src="{{translator.profileImageUrl}}" alt="profile Image">
 </div>
+{{/if}}
 
 <p>Name: {{translator.user.username}}</p>
 
