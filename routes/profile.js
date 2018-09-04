@@ -13,6 +13,7 @@ router.get("/show", (req, res) => {
     .exec(function(err, translator) {
       if (err) return handleError(err);
       console.log("The Translator data is %s", translator);
+      res.render("profile", { translator });
     });
 
   //result is:
