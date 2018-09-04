@@ -1,6 +1,6 @@
 <h1>Edit your Profile</h1>
 
-{{#if translator}} {{translator}}
+{{#if translator}} {{!-- {{translator}} --}}
 
 <form action="/profile/edit" method="post">
     <div class="form-group">
@@ -12,21 +12,28 @@
     <div class="form-group">
         <p>Role</p>
         <label for="Volunteer">Volunteer</label>
-        <input id="Volunteer" type="radio" name="role" class="form-control" value="Volunteer" checked="checked">
+        <input id="Volunteer" type="radio" name="role" class="form-control" value="Volunteer" onclick="ShowHidePrice()">
         <label for="Professional">Professional</label>
-        <input id="Professional" type="radio" name="role" class="form-control" value="Professional"> {{#if translator.role}}
-        <br>
-        <span class="current-value">Current Role: {{translator.role}}</span>
+
+        <input id="Professional" type="radio" name="role" class="form-control" value="Professional" onclick="ShowHidePrice()">        {{#if
+        translator.role}} <span class="current-value">Current Role: {{translator.role}}</span>
         {{/if}}
     </div>
 
-    {{#if translator.price}}
-    <div class="form-group">
+    {{#if isProfessional}}
+    <div id="showPrice" class="form-group" style="display: block">
         <label for="price">Fee in € per hour</label>
         <input id="price" type="number" name="price" class="form-control">
         <span class="current-value">Current Fee: € {{translator.price}}</span>
     </div>
     {{/if}}
+
+    <div id="showPrice" class="form-group" style="display: none">
+        <label for="price">Fee in € per hour</label>
+        <input id="price" type="number" name="price" class="form-control"> {{#if translator.price}}
+        <span class="current-value">Current Fee: € {{translator.price}}</span>
+        {{/if}}
+    </div>
 
     <div class="form-group">
         <label for="email">E-Mail</label>
@@ -91,6 +98,13 @@
 
 
 </form>
-{{/if}}
+
+<script type="text/javascript">
+    function ShowHidePrice() {
+        var Professional = document.getElementById("Professional");
+        var showPrice = document.getElementById("showPrice");
+        showPrice.style.display = Professional.checked ? "block" : "none";
+    }
+</script> {{/if}}
 
 <p>{{wo}}</p>
