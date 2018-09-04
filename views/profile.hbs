@@ -1,27 +1,52 @@
-<h1>Profile Page</h1>
-
 {{#if translator}}
-<p>Translator Page</p>
-
-<p>{{translator.user.username}}</p>
-
-{{#if translator.price}}
-<p>Fee: € {{translator.price}}/hr</p>
-{{/if}}
-
-<p>Rating: {{translator.rating}}</p>
-<p>E-Mail: {{translator.user.email}}</p>
+<h1>Translator Profile</h1>
 
 <div class="profile-img">
     <img src="{{translator.profileImageUrl}}" alt="profile Image">
 </div>
 
-{{translator}} {{/if}} {{!-- { background: [ 'Professional translator', 'Expertise in art' ], preferedSetting: [ 'No preferences'],
-_id: 5b8e4e84b9d308467d2aeebb, user: { _id: 5b8e4e83b9d308467d2aeeb7, email: 'test@professional.com', password: '$2a$08$ztcvtvpRp1EHNGYVnFo1wu7AtiQkcCxXwweSCM251jtfGphPQAVeG',
-username: 'testprofessional', role: 'Translator', __v: 0 }, telephone: '23-890', role: 'Professional', profileImageUrl: 'https://tinyurl.com/ydghhnky',
-location: 'Leipzig', languages: [ { _id: 5b8e4e84b9d308467d2aeebd, language: 'Tigrinya', level: 'C1' }, { _id: 5b8e4e84b9d308467d2aeebc,
-language: 'Wolof', level: 'C1' } ], price: 100, rating: 5, availability: 'Call to make an appointment', __v: 0 } --}} {{#if
-wo}}
+<p>Name: {{translator.user.username}}</p>
+
+
+{{#if translator.price}}
+<p>Fee: € {{translator.price}}/hr</p>
+{{/if}}
+<p>Rating: {{translator.rating}}</p>
+
+<p>E-Mail: {{translator.user.email}}</p>
+<p>Phone Number: {{translator.telephone}}</p>
+<p>Location: {{translator.location}}</p>
+
+<div class="language-wrapper">
+    <p>Languages</p>
+    <ul class="languages-list">
+        {{#each translator.languages}}
+        <li>{{this.language}} Level: {{this.level}}</li>
+        {{/each}}
+    </ul>
+</div>
+
+<div class="background-wrapper">
+    <p>Background</p>
+    <ul class="background-list">
+        {{#each translator.background}}
+        <li>{{this}}</li>
+        {{/each}}
+    </ul>
+</div>
+
+<div class="setting-wrapper">
+    <p>Preferred Setting</p>
+    <ul class="setting-list">
+        {{#each translator.preferedSetting}}
+        <li>{{this}}</li>
+        {{/each}}
+    </ul>
+</div>
+
+<a href="/edit">Edit Profile</a>
+
+{{/if}} {{#if wo}}
 
 
 <p>Wo Page</p>
