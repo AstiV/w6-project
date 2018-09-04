@@ -34,7 +34,7 @@ User.create(users, err => {
 
   User.findOne({ email: "test@volunteer.com" }).then(translator => {
     const newTranslator = {
-      loginData: translator.id,
+      user: translator.id,
       telephone: "1234-5678",
       role: "Volunteer",
       profileImageUrl: "https://tinyurl.com/y74ljegq",
@@ -57,7 +57,7 @@ User.create(users, err => {
 
   User.findOne({ email: "test@professional.com" }).then(translator => {
     const newTranslator = {
-      loginData: translator.id,
+      user: translator.id,
       telephone: "23-890",
       role: "Professional",
       profileImageUrl: "https://tinyurl.com/ydghhnky",
@@ -78,7 +78,7 @@ User.create(users, err => {
       console.log(`Created one translator`);
       User.findOne({ email: "test@wo.com" }).then(wo => {
         const newWo = {
-          loginData: wo.id,
+          user: wo.id,
           location: "Berlin",
           profileImageUrl: "https://tinyurl.com/ydzaghlc",
           idNumber: "A15 697 I7"

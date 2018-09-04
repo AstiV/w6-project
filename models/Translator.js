@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const translatorSchema = Schema({
-  loginData: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: "User"
   },
