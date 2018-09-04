@@ -11,3 +11,7 @@ body {
     width: 30vw;
     height: auto;
 }
+
+.current-value {
+    color: gray;
+}
