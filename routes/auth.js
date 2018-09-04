@@ -6,6 +6,10 @@ const fs = require("fs");
 const User = require("../models/User");
 const fileUpload = require("express-fileupload");
 
+router.get("/", (req, res) => {
+  res.render("index");
+});
+
 router.get("/login", ensureLoggedOut(), (req, res) => {
   res.render("auth/login", { message: req.flash("error") });
 });
