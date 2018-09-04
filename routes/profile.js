@@ -12,7 +12,6 @@ router.use((req, res, next) => {
       message: "You must be logged in to view this page"
     });
   } else {
-    //
     next();
   }
 });
@@ -34,6 +33,29 @@ router.get("/show", (req, res) => {
       })
       .catch(console.error);
   }
+});
+
+router.get("/edit", (req, res) => {
+  const { id } = req.user;
+
+  if (req.user.role === "WO") {
+    WO.findOne({ user: id })
+      .populate("user")
+      .then(wo => {
+        res.render("edit", { wo });
+      })
+      .catch(console.error);
+  } else if (req.user.role === "Translator") {
+    Translator.findOne({ user: id })
+      .populate("user")
+      .then(translator => {
+        res.render("edit", { translator });
+      })
+      .catch(console.error);
+  }
+});
+router.post("/edit", (req, res) => {
+  //TODO implement overwriting of db data
 });
 
 module.exports = router;
