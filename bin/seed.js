@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const User = require("../models/User");
 const Translator = require("../models/Translator");
 const WO = require("../models/WO");
+const bcrypt = require("bcrypt");
 
 const dbName = "translations";
 mongoose.connect(`mongodb://localhost/${dbName}`);
@@ -9,19 +10,19 @@ mongoose.connect(`mongodb://localhost/${dbName}`);
 const users = [
   {
     email: "test@wo.com",
-    password: "test",
+    password: bcrypt.hashSync("test", bcrypt.genSaltSync(8), null),
     username: "testwo",
     role: "WO"
   },
   {
     email: "test@volunteer.com",
-    password: "test",
+    password: bcrypt.hashSync("test", bcrypt.genSaltSync(8), null),
     username: "testvolunteer",
     role: "Translator"
   },
   {
     email: "test@professional.com",
-    password: "test",
+    password: bcrypt.hashSync("test", bcrypt.genSaltSync(8), null),
     username: "testprofessional",
     role: "Translator"
   }
