@@ -69,6 +69,7 @@
         </select>
         <label for="level">Level</label>
         <select name="level" id="level">
+            <option value=""></option>
             <option value="A1">A1</option>
             <option value="A2">A2</option>
             <option value="B1">B1</option>
@@ -91,6 +92,7 @@
         <textarea cols="50" rows="3" placeholder="Describe your setting preferences here..."></textarea> {{#if translator.preferedSetting}}
         <span class="current-value">Current Setting Preferences: {{translator.preferedSetting}}</span>
         {{/if}}
+
     </div>
 
 
