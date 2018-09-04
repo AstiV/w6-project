@@ -7,15 +7,15 @@ const WO = require("../models/WO");
 router.get("/show", (req, res) => {
   const { id } = req.user;
   if (req.user.role === "WO") {
-    WO.findOne({ loginData: id })
-      .populate("loginData")
-      .exec(function(err, wo) {
-        if (err) return handleError(err);
+    WO.findOne({ user: id })
+      .populate("user")
+      .then(wo => {
         res.render("profile", { wo });
-      });
+      })
+      .catch(console.error);
   } else if (req.user.role === "Translator") {
-    Translator.findOne({ loginData: id })
-      .populate("loginData")
+    Translator.findOne({ user: id })
+      .populate("user")
       .exec(function(err, translator) {
         if (err) return handleError(err);
         res.render("profile", { translator });

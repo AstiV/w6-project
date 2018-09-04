@@ -130,7 +130,7 @@ passport.use(
                 if (role === "WO") {
                   User.find({ email }).then(user => {
                     new WO({
-                      loginData: user[0]._id
+                      user: user[0]._id
                     })
                       .save()
                       .then(result => {
@@ -140,7 +140,7 @@ passport.use(
                 } else if (role === "Translator") {
                   User.find({ email }).then(user => {
                     new Translator({
-                      loginData: user[0]._id
+                      user: user[0]._id
                     })
                       .save()
                       .then(result => {
