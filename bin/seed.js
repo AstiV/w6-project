@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const User = require("../models/User");
 const Translator = require("../models/Translator");
 const WO = require("../models/WO");
+const bcrypt = require("bcrypt");
 
 const dbName = "translations";
 mongoose.connect(`mongodb://localhost/${dbName}`);
@@ -9,19 +10,19 @@ mongoose.connect(`mongodb://localhost/${dbName}`);
 const users = [
   {
     email: "test@wo.com",
-    password: "test",
+    password: bcrypt.hashSync("test", bcrypt.genSaltSync(8), null),
     username: "testwo",
     role: "WO"
   },
   {
     email: "test@volunteer.com",
-    password: "test",
+    password: bcrypt.hashSync("test", bcrypt.genSaltSync(8), null),
     username: "testvolunteer",
     role: "Translator"
   },
   {
     email: "test@professional.com",
-    password: "test",
+    password: bcrypt.hashSync("test", bcrypt.genSaltSync(8), null),
     username: "testprofessional",
     role: "Translator"
   }
@@ -33,7 +34,7 @@ User.create(users, err => {
 
   User.findOne({ email: "test@volunteer.com" }).then(translator => {
     const newTranslator = {
-      loginData: translator.id,
+      user: translator.id,
       telephone: "1234-5678",
       role: "Volunteer",
       profileImageUrl: "https://tinyurl.com/y74ljegq",
@@ -56,7 +57,7 @@ User.create(users, err => {
 
   User.findOne({ email: "test@professional.com" }).then(translator => {
     const newTranslator = {
-      loginData: translator.id,
+      user: translator.id,
       telephone: "23-890",
       role: "Professional",
       profileImageUrl: "https://tinyurl.com/ydghhnky",
@@ -77,7 +78,7 @@ User.create(users, err => {
       console.log(`Created one translator`);
       User.findOne({ email: "test@wo.com" }).then(wo => {
         const newWo = {
-          loginData: wo.id,
+          user: wo.id,
           location: "Berlin",
           profileImageUrl: "https://tinyurl.com/ydzaghlc",
           idNumber: "A15 697 I7"

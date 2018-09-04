@@ -2,6 +2,7 @@
 
 {{#if translator}}
 <p>Translator Page</p>
+
 {{translatorData}} {{/if}}
 
 <p>{{translator.loginData.username}}</p>
@@ -24,3 +25,7 @@ _id: 5b8e4e84b9d308467d2aeebb, loginData: { _id: 5b8e4e83b9d308467d2aeeb7, email
 username: 'testprofessional', role: 'Translator', __v: 0 }, telephone: '23-890', role: 'Professional', profileImageUrl: 'https://tinyurl.com/ydghhnky',
 location: 'Leipzig', languages: [ { _id: 5b8e4e84b9d308467d2aeebd, language: 'Tigrinya', level: 'C1' }, { _id: 5b8e4e84b9d308467d2aeebc,
 language: 'Wolof', level: 'C1' } ], price: 100, rating: 5, availability: 'Call to make an appointment', __v: 0 } --}}
+
+{{translator}} {{/if}} {{#if wo}}
+<p>Wo Page</p>
+{{wo}} {{/if}}
