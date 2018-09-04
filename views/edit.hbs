@@ -10,7 +10,7 @@
     <div class="form-group">
         <p>Role:</p>
         <label for="Volunteer">Volunteer</label>
-        <input id="Volunteer" type="radio" name="role" class="form-control" value="Volunteer" checked="checked">
+        <input id="Volunteer" type="radio" name="role" class="form-control" value="Volunteer">
         <label for="Professional">Professional</label>
         <input id="Professional" type="radio" name="role" class="form-control" value="Professional">
     </div>
@@ -40,6 +40,7 @@
         <input id="language" type="text" name="language" class="form-control">
         <label for="level">Level</label>
         <select name="level" id="level">
+            <option value=""></option>
             <option value="A1">A1</option>
             <option value="A2">A2</option>
             <option value="B1">B1</option>
@@ -56,7 +57,8 @@
 
     <div class="form-group">
         <label for="preferedSetting">Preferred Setting</label>
-        {{!-- <input id="preferedSetting" type="text" name="preferedSetting" class="form-control"> --}}
+        {{!--
+        <input id="preferedSetting" type="text" name="preferedSetting" class="form-control"> --}}
         <textarea cols="50" rows="3" placeholder="Describe your setting preferences here..."></textarea>
     </div>
 
