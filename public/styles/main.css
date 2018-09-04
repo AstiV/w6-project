@@ -1,17 +1,57 @@
+:root {
+  --main-primary-color: #0a369d;
+  --background-grey-color: #cfdee7;
+  --main-text-light: white;
+}
+
 * {
-    box-sizing: border-box;
-    margin: 0;
+  box-sizing: border-box;
+  margin: 0;
+  /* padding: 0; */
+}
+
+html {
+  font-size: 62.5%;
 }
 
 body {
-    background-color: antiquewhite;
+  background-color: var(--background-grey-color);
+  font-family: "M PLUS 1p", sans-serif;
+  font-size: 1.7rem;
+}
+
+.body-container {
+  background-color: white;
+  margin: 0 auto;
+  width: 80vw;
+  height: 90vh;
+  padding: 5rem;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 10vh;
+  padding: 3rem;
+  background-color: var(--main-primary-color);
+}
+
+nav a {
+  color: var(--main-text-light);
+  text-decoration: none;
+}
+
+.nav-profile *,
+.nav-login * {
+  margin-left: 2rem;
 }
 
 .profile-img img {
-    width: 30vw;
-    height: auto;
+  width: 30vw;
+  height: auto;
 }
 
 .current-value {
-    color: gray;
+  color: gray;
 }
