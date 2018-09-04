@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const autopopulate = require("mongoose-autopopulate");
 
 const translatorSchema = Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: "User"
+    ref: "User",
+    autopopulate: true
   },
   profileImageUrl: {
     type: String
@@ -33,6 +35,8 @@ const translatorSchema = Schema({
   //   ],
   preferedSetting: Array //for example doesn't want to work with people who went through specific experiences
 });
+
+translatorSchema.plugin(autopopulate);
 
 const Translator = mongoose.model("Translator", translatorSchema);
 module.exports = Translator;
