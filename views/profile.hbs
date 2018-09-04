@@ -1,31 +1,28 @@
-<h1>Profile page</h1>
+<h1>Profile Page</h1>
 
 {{#if translator}}
 <p>Translator Page</p>
 
-{{translatorData}} {{/if}}
+<p>{{translator.user.username}}</p>
 
-<p>{{translator.loginData.username}}</p>
+{{#if translator.price}}
 <p>Fee: € {{translator.price}}/hr</p>
+{{/if}}
+
 <p>Rating: {{translator.rating}}</p>
-<p>E-Mail: {{translator.loginData.mail}}</p>
+<p>E-Mail: {{translator.user.email}}</p>
 
 <div class="profile-img">
-    <img src="{{translator.profileImageUrl}}" alt="profile Image"> {{translator}} {{/if}} {{#if wo}}
+    <img src="{{translator.profileImageUrl}}" alt="profile Image">
 </div>
 
-
-
-
-
-
-<p>Wo Page</p>
-{{wo}} {{/if}} {{!-- { background: [ 'Professional translator', 'Expertise in art' ], preferedSetting: [ 'No preferences'],
-_id: 5b8e4e84b9d308467d2aeebb, loginData: { _id: 5b8e4e83b9d308467d2aeeb7, email: 'test@professional.com', password: '$2a$08$ztcvtvpRp1EHNGYVnFo1wu7AtiQkcCxXwweSCM251jtfGphPQAVeG',
+{{translator}} {{/if}} {{!-- { background: [ 'Professional translator', 'Expertise in art' ], preferedSetting: [ 'No preferences'],
+_id: 5b8e4e84b9d308467d2aeebb, user: { _id: 5b8e4e83b9d308467d2aeeb7, email: 'test@professional.com', password: '$2a$08$ztcvtvpRp1EHNGYVnFo1wu7AtiQkcCxXwweSCM251jtfGphPQAVeG',
 username: 'testprofessional', role: 'Translator', __v: 0 }, telephone: '23-890', role: 'Professional', profileImageUrl: 'https://tinyurl.com/ydghhnky',
 location: 'Leipzig', languages: [ { _id: 5b8e4e84b9d308467d2aeebd, language: 'Tigrinya', level: 'C1' }, { _id: 5b8e4e84b9d308467d2aeebc,
-language: 'Wolof', level: 'C1' } ], price: 100, rating: 5, availability: 'Call to make an appointment', __v: 0 } --}}
+language: 'Wolof', level: 'C1' } ], price: 100, rating: 5, availability: 'Call to make an appointment', __v: 0 } --}} {{#if
+wo}}
 
-{{translator}} {{/if}} {{#if wo}}
+
 <p>Wo Page</p>
 {{wo}} {{/if}}
