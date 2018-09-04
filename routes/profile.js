@@ -26,7 +26,10 @@ router.get("/show", (req, res) => {
       })
       .catch(console.error);
   } else if (req.user.role === "Translator") {
-    Translator.findOne({ user: id }).then(translator => {
+    Translator.findOne({ user: id }).then(translatorRaw => {
+      let translator = { ...translatorRaw }._doc;
+      translator.background = translator.background.split(", ");
+      translator.preferedSetting = translator.preferedSetting.split(", ");
       res.render("profile", { translator });
     });
   }
@@ -56,15 +59,12 @@ router.post("/edit", (req, res) => {
   const { id } = req.user;
   const dataFromForm = req.body;
   const fields = Object.keys(dataFromForm);
-  let filledFields = [];
+  let filledFields = {};
   fields.forEach((field, ind, arr) => {
-    let notEmptyField = {};
-    notEmptyField[field] = dataFromForm[field];
     if (dataFromForm[field].length > 0) {
-      filledFields.push(notEmptyField);
+      filledFields[field] = dataFromForm[field];
     }
   });
-  filledFields = filledFields[0];
 
   Translator.findOneAndUpdate(
     { user: id },
