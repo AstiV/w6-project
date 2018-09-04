@@ -60,7 +60,6 @@ router.post("/edit", (req, res) => {
   const { id } = req.user;
   const dataFromForm = req.body;
   const fields = Object.keys(dataFromForm);
-  // let filledFields = {};
   let userModelFields = {};
   let translatorModelFields = {};
   fields.forEach((field, ind, arr) => {
@@ -81,7 +80,6 @@ router.post("/edit", (req, res) => {
       if (err) {
         console.log("Something wrong when updating translator model data!");
       }
-      console.log(doc);
       User.findOneAndUpdate(
         { _id: id },
         { $set: userModelFields },
