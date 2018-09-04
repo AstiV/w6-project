@@ -26,12 +26,9 @@ router.get("/show", (req, res) => {
       })
       .catch(console.error);
   } else if (req.user.role === "Translator") {
-    Translator.findOne({ user: id })
-      .populate("user")
-      .then(translator => {
-        res.render("profile", { translator });
-      })
-      .catch(console.error);
+    Translator.findOne({ user: id }).then(translator => {
+      res.render("profile", { translator });
+    });
   }
 });
 
@@ -46,12 +43,9 @@ router.get("/edit", (req, res) => {
       })
       .catch(console.error);
   } else if (req.user.role === "Translator") {
-    Translator.findOne({ user: id })
-      .populate("user")
-      .then(translator => {
-        res.render("edit", { translator });
-      })
-      .catch(console.error);
+    Translator.findOne({ user: id }).then(translator => {
+      res.render("edit", { translator });
+    });
   }
 });
 router.post("/edit", (req, res) => {
