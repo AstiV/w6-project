@@ -36,14 +36,17 @@
 
     <div class="form-group">
         <label for="telephone">Phone Number</label>
-        <input id="telephone" type="tel" name="telephone" class="form-control" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+        <input id="telephone" type="tel" name="telephone" class="form-control" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">        {{#if
+        translator.telephone}}
         <span class="current-value">Current Phone Number: {{translator.telephone}}</span>
+        {{/if}}
     </div>
 
     <div class="form-group">
         <label for="location">Location</label>
-        <input id="location" type="text" name="location" class="form-control">
+        <input id="location" type="text" name="location" class="form-control"> {{#if translator.location}}
         <span class="current-value">Current Location: {{translator.location}}</span>
+        {{/if}}
     </div>
 
     <div class="form-group">
@@ -62,15 +65,17 @@
 
     <div class="form-group">
         <label for="background">Background</label>
-        <input id="background" type="text" name="background" class="form-control">
+        <input id="background" type="text" name="background" class="form-control"> {{#if translator.background}}
         <span class="current-value">Current Background: {{translator.background}}</span>
+        {{/if}}
     </div>
 
     <div class="form-group">
         <label for="preferedSetting">Preferred Setting</label>
         {{!-- <input id="preferedSetting" type="text" name="preferedSetting" class="form-control"> --}}
-        <textarea cols="50" rows="3" placeholder="Describe your setting preferences here..."></textarea>
+        <textarea cols="50" rows="3" placeholder="Describe your setting preferences here..."></textarea> {{#if translator.preferedSetting}}
         <span class="current-value">Current Setting Preferences: {{translator.preferedSetting}}</span>
+        {{/if}}
     </div>
 
 
