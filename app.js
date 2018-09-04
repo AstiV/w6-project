@@ -53,22 +53,6 @@ app.set("views", path.join(__dirname, "/views"));
 app.set("view engine", "hbs");
 
 //PASSPORT SETUP
-passport.serializeUser((user, cb) => {
-  cb(null, user._id);
-});
-
-passport.deserializeUser((id, cb) => {
-  User.findById(id, (err, user) => {
-    if (err) {
-      return cb(err);
-    }
-
-    // const cleanUser = user.toObject();
-    // delete cleanUser.password;
-
-    cb(null, user);
-  });
-});
 
 passport.use(
   "local-login",
@@ -94,7 +78,6 @@ passport.use(
   new LocalStrategy(
     { passReqToCallback: true },
     (req, username, password, next) => {
-      console.log("hallo");
       // To avoid race conditions
       process.nextTick(() => {
         User.findOne(
@@ -156,6 +139,23 @@ passport.use(
     }
   )
 );
+
+passport.serializeUser((user, cb) => {
+  cb(null, user._id);
+});
+
+passport.deserializeUser((id, cb) => {
+  User.findById(id, (err, user) => {
+    if (err) {
+      return cb(err);
+    }
+
+    // const cleanUser = user.toObject();
+    // delete cleanUser.password;
+
+    cb(null, user);
+  });
+});
 
 app.use(passport.initialize());
 app.use(passport.session());
