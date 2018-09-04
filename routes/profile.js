@@ -26,7 +26,10 @@ router.get("/show", (req, res) => {
       })
       .catch(console.error);
   } else if (req.user.role === "Translator") {
-    Translator.findOne({ user: id }).then(translator => {
+    Translator.findOne({ user: id }).then(translatorRaw => {
+      let translator = { ...translatorRaw }._doc;
+      translator.background = translator.background.split(", ");
+      translator.preferedSetting = translator.preferedSetting.split(", ");
       res.render("profile", { translator });
     });
   }
