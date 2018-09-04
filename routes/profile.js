@@ -16,10 +16,10 @@ router.get("/show", (req, res) => {
   } else if (req.user.role === "Translator") {
     Translator.findOne({ user: id })
       .populate("user")
-      .exec(function(err, translator) {
-        if (err) return handleError(err);
+      .then(translator => {
         res.render("profile", { translator });
-      });
+      })
+      .catch(console.error);
   }
 });
 
