@@ -10,7 +10,8 @@ router.get("/", (req, res) => {
   res.render("index");
 });
 
-router.get("/login", ensureLoggedOut(), (req, res) => {
+router.get("/login", (req, res) => {
+  req.logout();
   res.render("auth/login", { message: req.flash("error") });
 });
 
