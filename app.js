@@ -160,11 +160,11 @@ passport.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// app.get("/", (req, res) => {
+//   res.render("index");
+// });
 app.use("/", authRouter);
 app.use("/profile", profileRouter);
-app.get("/", (req, res) => {
-  res.render("index");
-});
 
 app.listen(3000, () => {
   console.log(`server starting on port 3000`);

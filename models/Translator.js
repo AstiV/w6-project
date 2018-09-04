@@ -20,12 +20,12 @@ const translatorSchema = Schema({
   //   },
   //   location: { type: Schema.Types.ObjectId, ref: "Location" },
   telephone: String,
-  //   languages: [
-  //     {
-  //       language: { type: Schema.Types.ObjectId, ref: "Language" },
-  //       level: { type: String, enum: ["A1", "A2", "B1", "B2", "C1", "C2"] }
-  //     }
-  //   ],
+  languages: [
+    {
+      language: { type: Schema.Types.ObjectId, ref: "Language" },
+      level: { type: String, enum: ["A1", "A2", "B1", "B2", "C1", "C2"] }
+    }
+  ],
   rating: Number,
   availability: String,
   price: Number,
@@ -38,10 +38,6 @@ const translatorSchema = Schema({
   //   ],
   prefferedSetting: Array //for example doesn't want to work with people who went through specific experiences
 });
-
-translatorSchema.statics.getLoginData = function getLoginData() {
-  return Translator.find({}).populate("loginData");
-};
 
 const Translator = mongoose.model("Translator", translatorSchema);
 module.exports = Translator;
