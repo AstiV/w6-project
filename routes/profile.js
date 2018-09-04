@@ -2,19 +2,26 @@ const express = require("express");
 const router = express.Router();
 const { ensureLoggedIn, ensureLoggedOut } = require("connect-ensure-login");
 const Translator = require("../models/Translator");
-const Language = require("../models/Language");
+const WO = require("../models/WO");
 
 router.get("/show", (req, res) => {
-  //   console.log(req.user);
-  const { id } = req.user;
-
-  Translator.findOne({ loginData: id })
-    .populate("loginData")
-    .exec(function(err, translator) {
+  console.log("req.user", req.user);
+  const { _id } = req.user;
+  if (req.user.role === "WO") {
+    WO.findOne({ loginData: _id }).exec(function(err, wo) {
       if (err) return handleError(err);
-      console.log("The Translator data is %s", translator);
-      res.render("profile", { translator });
+      console.log("The WO data is %s", wo);
+      res.render("profile", { wo });
     });
+  } else if (req.user.role === "Translator") {
+    Translator.findOne({ loginData: _id })
+      .populate("loginData")
+      .exec(function(err, translator) {
+        if (err) return handleError(err);
+        console.log("The Translator data is %s", translator);
+        res.render("profile", { translator });
+      });
+  }
 
   //result is:
   // The Translator data is { background: [],
