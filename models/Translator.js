@@ -23,9 +23,9 @@ const translatorSchema = Schema({
       level: { type: String, enum: ["A1", "A2", "B1", "B2", "C1", "C2"] }
     }
   ],
-  rating: String,
+  rating: { type: String, default: "0" },
   availability: String,
-  price: String,
+  price: { type: String, default: "0" },
   background: String, //relevant job experience for example
   //   meeting: [
   //     {
