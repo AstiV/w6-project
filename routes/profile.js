@@ -44,7 +44,10 @@ router.get("/edit", (req, res) => {
       .catch(console.error);
   } else if (req.user.role === "Translator") {
     Translator.findOne({ user: id }).then(translator => {
-      res.render("edit", { translator });
+      res.render("edit", {
+        translator,
+        isProfessional: translator.role === "Professional"
+      });
     });
   }
 });
@@ -63,7 +66,6 @@ router.post("/edit", (req, res) => {
   });
   filledFields = filledFields[0];
 
-  // console.log("id", id);
   Translator.findOneAndUpdate(
     { user: id },
     { $set: filledFields },
@@ -72,7 +74,7 @@ router.post("/edit", (req, res) => {
       if (err) {
         console.log("Something wrong when updating data!");
       }
-
+      res.redirect("/profile/show");
       console.log(doc);
     }
   );
