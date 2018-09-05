@@ -1,6 +1,6 @@
 <h1>{{meeting.title}}</h1>
 <form action="/meeting/edit" method="POST">
-    <input type="hidden" name="id" id="id" value="{{meeting.id}}"></input>
+    <input type="hidden" name="id" value={{meeting._id}}></input>
     <label for="status">Meeting status</label>
     <select name="status" value="status" id="status">
         <option name="{{meeting.status}}">{{meeting.status}}</option>

@@ -12,8 +12,11 @@
 <p>Participants</p>
 <p>Wellfare officer - {{meeting.wo.name}}</p>
 <p>Translator - {{meeting.translator.name}}</p>
-<p>Other participants - {{meeting.participants}}</p>
+<p>Other participants</p>
+{{#each meeting.participants}}
+<li>{{this}}</li>
+{{/each}}
 
 <button type="button">Send Reminder</button>
 <button type="button">Pay Translator</button>
-<a href="/meeting/edit/{{meeting.id}}">Edit Meeting</a>
+<a href="/meeting/edit/{{meeting._id}}">Edit Meeting</a>
