@@ -41,9 +41,10 @@ router.post("/edit", (req, res) => {
     address,
     caseInfo,
     woStatus,
-    translatorStatus,
-    participants
+    translatorStatus
   } = req.body;
+  let { participants } = req.body;
+  participants = Array.from(participants).join("");
   //check if translator email exists
   User.findOne({ email: translatorEmail }).then(translator => {
     //check if wo email exists
@@ -89,7 +90,8 @@ router.post("/edit", (req, res) => {
 router.get("/edit/:id", (req, res) => {
   const { id } = req.params;
   Meeting.findById({ _id: id }).then(meeting => {
-    meeting.toObject();
+    meeting = meeting.toObject();
+    meeting.participants = meeting.participants.split(",");
     res.render(`meeting/edit`, { meeting });
   });
 });
@@ -98,6 +100,8 @@ router.get("/show/:id", (req, res) => {
   const { id } = req.params;
   Meeting.findById({ _id: id })
     .then(meeting => {
+      meeting = meeting.toObject();
+      meeting.participants = meeting.participants.split(",");
       res.render("meeting/show", { meeting });
     })
     .catch(console.error);
