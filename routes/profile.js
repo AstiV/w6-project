@@ -49,7 +49,7 @@ router.get("/edit", (req, res) => {
     WO.findOne({ user: id })
       .populate("user")
       .then(wo => {
-        res.render("profile/edit", { wo });
+        res.render("profile/edit", { wo, isWO: wo.role === "WO" });
       })
       .catch(console.error);
   } else if (req.user.role === "Translator") {

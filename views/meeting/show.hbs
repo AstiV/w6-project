@@ -10,8 +10,8 @@
 <p>{{meeting.caseInfo}}</p>
 
 <p>Participants</p>
-<p>Wellfare officer - {{meeting.wo.name}}</p>
-<p>Translator - {{meeting.translator.name}}</p>
+<p>Wellfare officer - {{meeting.wo.name}} - {{meeting.woStatus}}</p>
+<p>Translator - {{meeting.translator.name}} - {{meeting.translatorStatus}}</p>
 <p>Other participants</p>
 {{#each meeting.participants}}
 <li>{{this}}</li>
