@@ -1,1 +1,49 @@
-<h1>Meeting/edit</h1>
+<h1>{{meeting.title}}</h1>
+<form action="/meeting/edit" method="POST">
+    <input type="hidden" name="id" id="id" value="{{meeting.id}}"></input>
+    <label for="status">Meeting status</label>
+    <select name="status" value="status" id="status">
+        <option name="{{meeting.status}}">{{meeting.status}}</option>
+        <option name="confirmed" id="confirmed">Confirmed</option>
+        <option name="cancelled" id="cancelled">Cancelled</option>
+        <option name="waiting" id="waiting">Waiting</option>
+    </select>
+    <label for="date">Date</label>
+    <input name="date" type="text" id="date" value="{{meeting.date}}">
+
+    <label for="time">Time</label>
+    <input id="time" name="time" type="text" value="{{meeting.time}}">
+
+    <label for="address">Address</label>
+    <input id="address" name="address" type="text" value='{{meeting.address}}'></input>
+
+    <label for="caseInfo">Case information</label>
+    <textarea name="caseInfo" id="caseInfo" cols="100" rows="10">{{meeting.caseInfo}}</textarea>
+
+    <p>Participants</p>
+
+    <label for="wo">Change Wellfare officer. Enter Email: </label>
+    <input type="text" id="wo" name="woEmail" value="{{meeting.wo.email}}">
+    <select name="woStatus" value="{{meeting.woStatus}}" id="woStatus">
+        <option name="{{meeting.woStatus}}">{{meeting.woStatus}}</option>
+        <option name="confirmed" id="confirmed">Confirmed</option>
+        <option name="cancelled" id="cancelled">Cancelled</option>
+        <option name="waiting" id="waiting">Waiting</option>
+    </select>
+
+    <label for="translator">Change translator. Enter Email:</label>
+    <input type="text" id="translator" name="translatorEmail" value="{{meeting.translator.email}}">
+    <select name="translatorStatus" value="{{meeting.translatorStatus}}" id="translatorStatus">
+        <option name="{{meeting.translatorStatus}}">{{meeting.translatorStatus}}</option>
+        <option name="confirmed" id="confirmed">Confirmed</option>
+        <option name="cancelled" id="cancelled">Cancelled</option>
+        <option name="waiting" id="waiting">Waiting</option>
+    </select>
+
+    <label for="participants">Other participants</label>
+    <textarea name="participants">{{meeting.participants}}</textarea>
+
+    <button type="submit">Edit meeting</button>
+</form>
+
+{{meeting}} {{message}}

@@ -1,7 +1,11 @@
+{{message}}
+
 <h1>Meetings dashboard</h1>
 
 {{#each meetings}}
-<p><b>{{title}}</b></p>
+<p>
+    <b>{{title}}</b>
+</p>
 <p>{{status}}</p>
 <a href="/meeting/show/{{id}}">See more details</a>
 {{/each}}
