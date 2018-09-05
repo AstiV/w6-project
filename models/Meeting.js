@@ -4,6 +4,16 @@ const autopopulate = require("mongoose-autopopulate");
 
 const meetingSchema = Schema({
   title: String,
+  woStatus: {
+    type: String,
+    enum: ["waiting", "confirmed", "cancelled"],
+    default: "waiting"
+  },
+  translatorStatus: {
+    type: String,
+    enum: ["waiting", "confirmed", "cancelled"],
+    default: "waiting"
+  },
   wo: {
     type: Schema.Types.ObjectId,
     ref: "User",
