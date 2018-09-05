@@ -31,7 +31,6 @@ router.get("/", (req, res) => {
 });
 
 router.post("/edit", (req, res) => {
-  console.log(req.body);
   const woEmail = req.body.woEmail;
   const translatorEmail = req.body.translatorEmail;
   const {
@@ -50,7 +49,6 @@ router.post("/edit", (req, res) => {
     //check if wo email exists
     User.findOne({ email: woEmail })
       .then(wo => {
-        console.log("wo, ", wo);
         //if both exist then update meeting
         Meeting.findByIdAndUpdate(
           { _id: id },
@@ -72,43 +70,26 @@ router.post("/edit", (req, res) => {
           { new: true }
         )
           .then(meeting => {
-            console.log(meeting);
-
             res.redirect(`/meeting/show/${id}`);
           })
           .catch(err => {
             //something went wrong with the editing of old data
-            console.log("editing didn't work");
             res.render(`meeting/index`, { message: err });
           });
-        // .res.render(`meeting/edit/${id}`, { message: err });
       })
       .catch(err => {
-        //if wo email doesn't exist send err message to fe
-        console.log(err);
-
+        //if wo and translator email doesn't exist send err message to fe
         res.render(`meeting/index`, {
           message: "There is no user with that email. Please try a valid email."
         });
       });
   });
-  // .catch(err => {
-  //   //if translator email doesn't exist send err message to fe
-  //   console.log("translator email not found");
-
-  //   res.redirect(`/meeting/edit/${id}`, {
-  //     message:
-  //       "There is no translator with that email. Please try a valid email."
-  //   });
-  // });
 });
 
 router.get("/edit/:id", (req, res) => {
   const { id } = req.params;
   Meeting.findById({ _id: id }).then(meeting => {
-    // meeting = JSON.stringify(meeting);
     meeting.toObject();
-    // console.log(meeting);
     res.render(`meeting/edit`, { meeting });
   });
 });
@@ -120,6 +101,9 @@ router.get("/show/:id", (req, res) => {
       res.render("meeting/show", { meeting });
     })
     .catch(console.error);
+});
+router.get("/create", (req, res) => {
+  res.send("meeting create route");
 });
 
 module.exports = router;

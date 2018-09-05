@@ -27,12 +27,6 @@ const translatorSchema = Schema({
   availability: String,
   price: { type: String, default: "0" },
   background: String, //relevant job experience for example
-  //   meeting: [
-  //     {
-  //       meeting: { type: Schema.Types.ObjectId, ref: "Meeting" },
-  //       status: { type: String, enum: ["confirmed", "waiting", "cancelled"] }
-  //     }
-  //   ],
   preferedSetting: String //for example doesn't want to work with people who went through specific experiences
 });
 
