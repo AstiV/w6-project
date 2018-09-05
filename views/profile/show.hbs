@@ -1,52 +1,118 @@
 {{#if translator}}
-<h1>{{translator.user.username}}</h1>
 
-{{#if translator.profileImageUrl}}
-<div class="profile-img-wrapper">
-    <img class="profile-img" src="{{translator.profileImageUrl}}" alt="profile Image">
+<div class="profile-wrapper">
+
+
+    <div class="name-wrapper">
+        <h1>{{translator.user.username}}</h1>
+        <div class="btn-large">
+            <a class="btn-link" href="/profile/edit">Edit Profile</a>
+        </div>
+    </div>
+
+
+
+    {{!-- {{#if translator.profileImageUrl}}
+    <div class="profile-img-wrapper">
+        <img class="profile-img" src="{{translator.profileImageUrl}}" alt="profile Image">
+    </div>
+    {{/if}} --}}
+
+    <div class="card-wrapper">
+        <div class="card-wrapper-headline">
+            <h2>General Information</h2>
+        </div>
+        <div class="info-wrapper">
+            <div class="image-wrapper">
+                <div class="image-placeholder"></div>
+            </div>
+            <div class="info-text-wrapper">
+                <div class="info-item">
+                    <p><b>Role</b></p>
+                    <p>{{translator.role}}</p>
+                </div>
+
+                {{#if isProfessional}}
+                <div class="info-item">
+                    <p><b>Fee</b></p>
+                    <p> € {{translator.price}} /hr </p>
+                </div>
+                {{/if}}
+                <div class="info-item">
+                    <p><b>Rating</b></p>
+                    <p>{{translator.rating}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-wrapper">
+        <div class="card-wrapper-headline">
+            <h2>Contact Information</h2>
+        </div>
+        <div class="info-wrapper">
+            <div class="contact-location">
+                <p><b>Location</b></p>
+                <p>{{translator.location}}</p>
+            </div>
+            <div class="contact-mail-phone">
+                <p><b>E-Mail</b></p>
+                <p>{{translator.user.email}}</p>
+                <p><b>Phone</b></p>
+                <p>{{translator.telephone}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-wrapper">
+        <div class="card-wrapper-headline">
+            <h2>Languages</h2>
+        </div>
+        <div class="list-wrapper">
+            <ul class="list">
+                {{#each translator.languages}}
+                <li>{{this.language}} Level: {{this.level}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-wrapper">
+        <div class="card-wrapper-headline">
+            <h2>Background</h2>
+        </div>
+        <div class="tag-wrapper">
+            <ul class="tag-list">
+                {{#each translator.background}}
+                <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-wrapper">
+        <div class="card-wrapper-headline">
+            <h2>Preferred Setting</h2>
+        </div>
+        <div class="setting-wrapper">
+            <ul class="setting-list">
+                {{#each translator.preferedSetting}}
+                <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
 </div>
-{{/if}}
-
-<p>Role: {{translator.role}}</p>
 
 
-{{#if translator.isProfessional}}
-<p>Fee: € {{translator.price}}/hr</p>
-{{/if}}
-<p>Rating: {{translator.rating}}</p>
 
-<p>E-Mail: {{translator.user.email}}</p>
-<p>Phone Number: {{translator.telephone}}</p>
-<p>Location: {{translator.location}}</p>
 
-<div class="language-wrapper">
-    <p>Languages</p>
-    <ul class="languages-list">
-        {{#each translator.languages}}
-        <li>{{this.language}} Level: {{this.level}}</li>
-        {{/each}}
-    </ul>
-</div>
 
-<div class="background-wrapper">
-    <p>Background</p>
-    <ul class="background-list">
-        {{#each translator.background}}
-        <li>{{this}}</li>
-        {{/each}}
-    </ul>
-</div>
 
-<div class="setting-wrapper">
-    <p>Preferred Setting</p>
-    <ul class="setting-list">
-        {{#each translator.preferedSetting}}
-        <li>{{this}}</li>
-        {{/each}}
-    </ul>
-</div>
 
-<a href="/profile/edit">Edit Profile</a>
+
+
+
 
 {{/if}} {{#if wo}}
 <h1>Youth Welfare Officer Profile</h1>
