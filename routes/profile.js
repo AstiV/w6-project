@@ -58,21 +58,9 @@ router.get("/edit", (req, res) => {
 });
 router.post("/edit", (req, res) => {
   //TODO implement overwriting of db data
-  // console.log(req.body);
   const { id } = req.user;
   const dataFromForm = req.body;
-  // const fields = Object.keys(dataFromForm);
-  // let userModelFields = {};
-  // let translatorModelFields = {};
-  // fields.forEach((field, ind, arr) => {
-  //   if (dataFromForm[field].length > 0) {
-  //     if (field === "username" || field === "email") {
-  //       userModelFields[field] = dataFromForm[field].trim();
-  //     } else {
-  //       translatorModelFields[field] = dataFromForm[field];
-  //     }
-  //   }
-  // });
+
   const formattedFields = formatFields(dataFromForm);
 
   Translator.findOneAndUpdate(
