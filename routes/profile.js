@@ -58,7 +58,7 @@ router.get("/edit", (req, res) => {
 });
 router.post("/edit", (req, res) => {
   //TODO implement overwriting of db data
-  console.log(req.body);
+  // console.log(req.body);
   const { id } = req.user;
   const dataFromForm = req.body;
   // const fields = Object.keys(dataFromForm);
