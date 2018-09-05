@@ -6,7 +6,9 @@ const { ensureLoggedIn, ensureLoggedOut } = require("connect-ensure-login");
 //use this middleware at every request to check if user is wo
 router.use((req, res, next) => {
   //if there is not a running session with a user
-  if (req.user.role !== "WO") {
+  if (!req.user) {
+    res.render("index", { message: "You must be logged in to view this page" });
+  } else if (req.user.role !== "WO") {
     res.render("index", {
       message: "You must be logged in as Wellfare officer to create a meeting"
     });
