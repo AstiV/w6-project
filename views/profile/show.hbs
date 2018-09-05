@@ -1,13 +1,12 @@
 {{#if translator}}
-<h1>Translator Profile</h1>
+<h1>{{translator.user.username}}</h1>
 
 {{#if translator.profileImageUrl}}
-<div class="profile-img">
-    <img src="{{translator.profileImageUrl}}" alt="profile Image">
+<div class="profile-img-wrapper">
+    <img class="profile-img" src="{{translator.profileImageUrl}}" alt="profile Image">
 </div>
 {{/if}}
 
-<p>Name: {{translator.user.username}}</p>
 <p>Role: {{translator.role}}</p>
 
 
