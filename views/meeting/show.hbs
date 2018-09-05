@@ -1,2 +1,17 @@
-<h1>Meeting/show</h1>
-{{meeting}}
+<h1>Plan Aid Meeting: {{meeting.title}}</h1>
+
+<p>{{meeting.status}}</p>
+
+<p>{{meeting.date}}</p>
+<p>{{meeting.time}}</p>
+<p>{{meeting.address}}</p>
+<p>{{meeting.caseInfo}}</p>
+
+<p>Participants</p>
+<p>{{meeting.wo.username}}</p>
+<p>{{meeting.translator.username}}</p>
+<p>{{meeting.participants}}</p>
+
+<button type="button">Send Reminder</button>
+<button type="button">Pay Translator</button>
+<a href="/meeting/edit">Edit Meeting</a>
