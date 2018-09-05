@@ -102,5 +102,8 @@ router.get("/show/:id", (req, res) => {
     })
     .catch(console.error);
 });
+router.get("/create", (req, res) => {
+  res.send("meeting create route");
+});
 
 module.exports = router;

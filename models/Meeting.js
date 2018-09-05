@@ -28,8 +28,8 @@ const meetingSchema = Schema({
   caseInfo: String,
   status: {
     type: String,
-    enum: ["waiting", "confirmed", "cancelled"],
-    default: "waiting"
+    enum: ["Waiting", "Confirmed", "Cancelled"],
+    default: "Waiting"
   },
   address: String,
   date: String,
