@@ -14,6 +14,10 @@ router.use((req, res, next) => {
   }
 });
 
+router.get("/", (req, res) => {
+  res.render("meeting/index");
+});
+
 router.get("/show", (req, res) => {
   res.render("meeting/show");
 });

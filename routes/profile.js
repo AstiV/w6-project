@@ -60,30 +60,52 @@ router.post("/edit", (req, res) => {
   //TODO implement overwriting of db data
   const { id } = req.user;
   const dataFromForm = req.body;
-
   const formattedFields = formatFields(dataFromForm);
-
-  Translator.findOneAndUpdate(
-    { user: id },
-    { $set: formattedFields.translatorModelFields },
-    { new: true },
-    function(err, doc) {
-      if (err) {
-        console.log("Something wrong when updating translator model data!");
-      }
-      User.findOneAndUpdate(
-        { _id: id },
-        { $set: formattedFields.userModelFields },
-        { new: true },
-        function(err, doc) {
-          if (err) {
-            console.log("Something wrong when updating user model data!");
-          }
-          res.redirect("/profile/show");
+  if (req.user.role === "Translator") {
+    Translator.findOneAndUpdate(
+      { user: id },
+      { $set: formattedFields.translatorModelFields },
+      { new: true },
+      function(err, doc) {
+        if (err) {
+          console.log("Something wrong when updating translator model data!");
         }
-      );
-    }
-  );
+        User.findOneAndUpdate(
+          { _id: id },
+          { $set: formattedFields.userModelFields },
+          { new: true },
+          function(err, doc) {
+            if (err) {
+              console.log("Something wrong when updating user model data!");
+            }
+            res.redirect("/profile/show");
+          }
+        );
+      }
+    );
+  } else if (req.user.role === "WO") {
+    WO.findOneAndUpdate(
+      { user: id },
+      { $set: formattedFields.translatorModelFields },
+      { new: true },
+      function(err, doc) {
+        if (err) {
+          console.log("Something wrong when updating translator model data!");
+        }
+        User.findOneAndUpdate(
+          { _id: id },
+          { $set: formattedFields.userModelFields },
+          { new: true },
+          function(err, doc) {
+            if (err) {
+              console.log("Something wrong when updating user model data!");
+            }
+            res.redirect("/profile/show");
+          }
+        );
+      }
+    );
+  }
 });
 
 module.exports = router;
