@@ -1,5 +1,4 @@
 module.exports = function formatFields(rawData) {
-  console.log(rawData);
   const fields = Object.keys(rawData);
   let userModelFields = {};
   let translatorModelFields = {};

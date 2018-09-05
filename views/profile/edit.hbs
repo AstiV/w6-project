@@ -8,8 +8,8 @@
     </div>
 
     <div class="form-group">
-        <label for="username">Change Profile Picture</label>
-        <input type="file" name="profileImageUrl">
+        <label for="profileImageUrl">Change Profile Picture</label>
+        <input type="file" name="profileImageUrl" id="profileImageUrl">
     </div>
 
     <div class="form-group">
@@ -18,8 +18,7 @@
         <input id="Volunteer" type="radio" name="role" class="form-control" value="Volunteer" onclick="ShowHidePrice()">
         <label for="Professional">Professional</label>
 
-        <input id="Professional" type="radio" name="role" class="form-control" value="Professional" onclick="ShowHidePrice()">        {{#if
-        translator.role}}
+        <input id="Professional" type="radio" name="role" class="form-control" value="Professional" onclick="ShowHidePrice()"> {{#if translator.role}}
 
         <span class="current-value">Current Role: {{translator.role}}</span>
         {{/if}}
@@ -45,7 +44,7 @@
     <div class="form-group">
         <label for="telephone">Phone Number</label>
 
-        <input id="telephone" type="tel" name="telephone" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value={{translator.telephone}}>
+        <input id="telephone" type="tel" name="telephone" class="form-control" value={{translator.telephone}}>
     </div>
 
     <div class="form-group">
@@ -55,7 +54,9 @@
 
     <div class="form-group">
 
-        <span class="current-value"><b>Languages</b></span>
+        <span class="current-value">
+            <b>Languages</b>
+        </span>
         {{#each translator.languages}}
         <p>{{language}} -
             <span>{{level}}</span>
@@ -108,7 +109,7 @@
 </form>
 
 {{/if}} {{#if wo}}
-<form action="/profile/edit" method="post">
+<form action="/profile/edit" method="post" encType="multipart/form-data">
     <div class="form-group">
         <label for="username">Username</label>
         <input id="username" type="text" name="username" class="form-control" value={{wo.user.username}}>
