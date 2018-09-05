@@ -3,6 +3,7 @@ const router = express.Router();
 const { ensureLoggedIn, ensureLoggedOut } = require("connect-ensure-login");
 const Translator = require("../models/Translator");
 const WO = require("../models/WO");
+const User = require("../models/User");
 
 //use this middleware at every request to check if user is logged in
 router.use((req, res, next) => {
@@ -26,7 +27,10 @@ router.get("/show", (req, res) => {
       })
       .catch(console.error);
   } else if (req.user.role === "Translator") {
-    Translator.findOne({ user: id }).then(translator => {
+    Translator.findOne({ user: id }).then(translatorRaw => {
+      let translator = { ...translatorRaw }._doc;
+      translator.background = translator.background.split(", ");
+      translator.preferedSetting = translator.preferedSetting.split(", ");
       res.render("profile", { translator });
     });
   }
@@ -56,26 +60,37 @@ router.post("/edit", (req, res) => {
   const { id } = req.user;
   const dataFromForm = req.body;
   const fields = Object.keys(dataFromForm);
-  let filledFields = [];
+  let userModelFields = {};
+  let translatorModelFields = {};
   fields.forEach((field, ind, arr) => {
-    let notEmptyField = {};
-    notEmptyField[field] = dataFromForm[field];
     if (dataFromForm[field].length > 0) {
-      filledFields.push(notEmptyField);
+      if (field === "username" || field === "email") {
+        userModelFields[field] = dataFromForm[field].trim();
+      } else {
+        translatorModelFields[field] = dataFromForm[field];
+      }
     }
   });
-  filledFields = filledFields[0];
 
   Translator.findOneAndUpdate(
     { user: id },
-    { $set: filledFields },
+    { $set: translatorModelFields },
     { new: true },
     function(err, doc) {
       if (err) {
-        console.log("Something wrong when updating data!");
+        console.log("Something wrong when updating translator model data!");
       }
-      res.redirect("/profile/show");
-      console.log(doc);
+      User.findOneAndUpdate(
+        { _id: id },
+        { $set: userModelFields },
+        { new: true },
+        function(err, doc) {
+          if (err) {
+            console.log("Something wrong when updating user model data!");
+          }
+          res.redirect("/profile/show");
+        }
+      );
     }
   );
 });

@@ -23,17 +23,17 @@ const translatorSchema = Schema({
       level: { type: String, enum: ["A1", "A2", "B1", "B2", "C1", "C2"] }
     }
   ],
-  rating: Number,
+  rating: { type: String, default: "0" },
   availability: String,
-  price: Number,
-  background: Array, //relevant job experience for example
+  price: { type: String, default: "0" },
+  background: String, //relevant job experience for example
   //   meeting: [
   //     {
   //       meeting: { type: Schema.Types.ObjectId, ref: "Meeting" },
   //       status: { type: String, enum: ["confirmed", "waiting", "cancelled"] }
   //     }
   //   ],
-  preferedSetting: Array //for example doesn't want to work with people who went through specific experiences
+  preferedSetting: String //for example doesn't want to work with people who went through specific experiences
 });
 
 translatorSchema.plugin(autopopulate);
