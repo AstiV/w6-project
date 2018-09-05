@@ -2,9 +2,9 @@
   --main-primary-color: #0a369d;
   --background-grey-color: #cfdee7;
   --main-text-light: white;
-  --color-waiting: #ffbf46;
-  --color-confirmed: #8fd694;
-  --color-cancelled: #f25f5c;
+  --color-waiting: rgba(255, 190, 71, 0.637);
+  --color-confirmed: rgba(143, 213, 148, 0.61);
+  --color-cancelled: rgba(242, 94, 92, 0.658);
 }
 
 * {

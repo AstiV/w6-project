@@ -13,39 +13,63 @@
 
     .status {
         width: 12rem;
-        border-radius: 5px;
         text-align: center;
-        padding: .5rem 1.5rem;
+        border-radius: 5px;
+        padding: .5rem 2rem;
     }
 
     .meeting-card {
         width: 70%;
-        margin: 5rem;
         border: 1px solid var(--background-grey-color);
         padding: 3rem 2rem;
         display: flex;
         justify-content: space-between;
+        margin: 5rem auto;
     }
 
     .create-meeting-btn {
         text-decoration: none;
         color: inherit;
         border-bottom: solid 3px var(--color-confirmed);
-        font-size: 3rem;
+        font-size: 2.5rem;
+        transition: all .5s;
+        padding: 1rem 2rem;
+        line-height: 1.2;
+    }
+
+    .create-meeting-btn:hover {
+        border-radius: 5px;
+        background-color: var(--color-confirmed);
+    }
+
+    .case-title a {
+        font-size: 2.5rem;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .meeting-overview-header {
+        display: flex;
+        justify-content: space-between;
     }
 </style>
 
 {{message}}
-
-<h1>Meetings overview</h1>
-<a class="create-meeting-btn" href="/meeting/create" role="button">Create new meeting</a>
+<div class="meeting-overview-header">
+    <h1>Meetings overview</h1>
+    <a class="create-meeting-btn" href="/meeting/create" role="button">Create new meeting</a>
+</div>
 
 {{#each meetings}}
 <div class="meeting-card">
-    <p>
-        <strong>{{title}}</strong>
+    <p class="case-title">
+        <a href="/meeting/show/{{id}}" <strong>{{title}}</strong>
+        </a>
     </p>
-    <p class="{{status}} status">{{status}}</p>
-    <a href="/meeting/show/{{id}}">See more details</a>
+    <div>
+
+        <p class="{{status}} status">{{status}}</p>
+        <a href="/meeting/show/{{id}}">See more details</a>
+    </div>
 </div>
 {{/each}}
