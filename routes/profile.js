@@ -4,6 +4,7 @@ const { ensureLoggedIn, ensureLoggedOut } = require("connect-ensure-login");
 const Translator = require("../models/Translator");
 const WO = require("../models/WO");
 const User = require("../models/User");
+const formatFields = require("../utils/editFormFormatting");
 
 //use this middleware at every request to check if user is logged in
 router.use((req, res, next) => {
@@ -57,24 +58,26 @@ router.get("/edit", (req, res) => {
 });
 router.post("/edit", (req, res) => {
   //TODO implement overwriting of db data
+  console.log(req.body);
   const { id } = req.user;
   const dataFromForm = req.body;
-  const fields = Object.keys(dataFromForm);
-  let userModelFields = {};
-  let translatorModelFields = {};
-  fields.forEach((field, ind, arr) => {
-    if (dataFromForm[field].length > 0) {
-      if (field === "username" || field === "email") {
-        userModelFields[field] = dataFromForm[field].trim();
-      } else {
-        translatorModelFields[field] = dataFromForm[field];
-      }
-    }
-  });
+  // const fields = Object.keys(dataFromForm);
+  // let userModelFields = {};
+  // let translatorModelFields = {};
+  // fields.forEach((field, ind, arr) => {
+  //   if (dataFromForm[field].length > 0) {
+  //     if (field === "username" || field === "email") {
+  //       userModelFields[field] = dataFromForm[field].trim();
+  //     } else {
+  //       translatorModelFields[field] = dataFromForm[field];
+  //     }
+  //   }
+  // });
+  const formattedFields = formatFields(dataFromForm);
 
   Translator.findOneAndUpdate(
     { user: id },
-    { $set: translatorModelFields },
+    { $set: formattedFields.translatorModelFields },
     { new: true },
     function(err, doc) {
       if (err) {
@@ -82,7 +85,7 @@ router.post("/edit", (req, res) => {
       }
       User.findOneAndUpdate(
         { _id: id },
-        { $set: userModelFields },
+        { $set: formattedFields.userModelFields },
         { new: true },
         function(err, doc) {
           if (err) {
