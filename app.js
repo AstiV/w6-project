@@ -21,6 +21,7 @@ const cookieParser = require("cookie-parser");
 //routes
 const authRouter = require("./routes/auth");
 const profileRouter = require("./routes/profile");
+const meetingRouter = require("./routes/meeting");
 
 //MONGO SETUP
 //connect to MongoDB
@@ -150,8 +151,8 @@ passport.deserializeUser((id, cb) => {
       return cb(err);
     }
 
-    // const cleanUser = user.toObject();
-    // delete cleanUser.password;
+    const cleanUser = user.toObject();
+    delete cleanUser.password;
 
     cb(null, user);
   });
@@ -160,11 +161,9 @@ passport.deserializeUser((id, cb) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.get("/", (req, res) => {
-//   res.render("index");
-// });
 app.use("/", authRouter);
 app.use("/profile", profileRouter);
+app.use("/meeting", meetingRouter);
 
 app.listen(3000, () => {
   console.log(`server starting on port 3000`);
