@@ -73,4 +73,17 @@ describe("Field formatter", () => {
     };
     expect(formatFields(input)).toEqual(output);
   });
+  test("should be able to handle double languages", () => {
+    const input = {
+      language: ["Oromo", "Oromo"],
+      level: ["B2", "C1"]
+    };
+    const output = {
+      translatorModelFields: {
+        languages: [{ language: "Oromo", level: "C1" }]
+      },
+      userModelFields: {}
+    };
+    expect(formatFields(input)).toEqual(output);
+  });
 });
