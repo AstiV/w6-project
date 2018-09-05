@@ -1,7 +1,6 @@
 const cloudinary = require("cloudinary");
-const fileUpload = require("express-fileupload");
-const { upload } = require("./utils/cloudinary");
-const fs = require("fs");
+// const fileUpload = require("express-fileupload");
+// const fs = require("fs");
 
 cloudinary.config({
   cloud_name: "adiya",
