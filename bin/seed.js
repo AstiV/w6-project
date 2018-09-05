@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const User = require("../models/User");
 const Translator = require("../models/Translator");
 const WO = require("../models/WO");
+const Meeting = require("../models/Meeting");
 const bcrypt = require("bcrypt");
 
 const dbName = "translations";
@@ -25,6 +26,36 @@ const users = [
     password: bcrypt.hashSync("test", bcrypt.genSaltSync(8), null),
     username: "testprofessional",
     role: "Translator"
+  }
+];
+
+const meetings = [
+  {
+    title: "Case #13 - Adebowale",
+    participants: "Hans Müller - Legal guardian, Taavi Adebowale - Minor",
+    caseInfo:
+      "Woke celiac tumeric mixtape, photo booth lomo umami wayfarers blog fashion axe 3 wolf moon migas hammock. Kinfolk godard man bun, biodiesel tattooed four dollar toast XOXO vaporware. Brunch shabby chic gentrify +1 kale chips, narwhal sartorial kogi af truffaut kombucha ennui.",
+    address: "Eichhornstr. 3, Berlin",
+    date: "3.10.2018",
+    time: "10:30"
+  },
+  {
+    title: "Case #42 - Maaike",
+    participants: "Hans Müller - Legal guardian, Abarrane Maaike - Minor",
+    caseInfo:
+      "Kinfolk tbh af jianbing. Next level mustache affogato ramps jianbing plaid. Gentrify kombucha salvia, sustainable brooklyn af flannel prism iPhone tumblr authentic beard shabby chic. Humblebrag bespoke distillery normcore brooklyn tattooed freegan, leggings succulents ethical snackwave. Pinterest literally craft beer narwhal.",
+    address: "Kantstr. 3, Berlin",
+    date: "25.9.2018",
+    time: "14:00"
+  },
+  {
+    title: "Case #1337 - Ealasaid",
+    participants: "Hans Müller - Legal guardian, Fahim Ealasaid - Minor",
+    caseInfo:
+      "Bicycle rights cray shoreditch iPhone, hashtag fashion axe umami +1 echo park. Hell of lumbersexual flannel beard sustainable. Single-origin coffee cred umami tbh tattooed migas, marfa literally distillery deep v. Fixie squid put a bird on it yr microdosing yuccie try-hard pok pok sustainable man braid vape vexillologist migas street art.",
+    address: "Kantstr. 3, Berlin",
+    date: "10.11.2018",
+    time: "11:00"
   }
 ];
 
@@ -88,7 +119,38 @@ User.create(users, err => {
           if (err) throw err;
           console.log(`Created one WO`);
 
-          mongoose.connection.close();
+          User.findOne({ email: "test@wo.com" }).then(woUser => {
+            User.findOne({ email: "test@professional.com" }).then(transUser => {
+              const newMeeting1 = meetings[0];
+              newMeeting1["wo"] = woUser.id;
+              newMeeting1["translator"] = transUser.id;
+
+              const newMeeting2 = meetings[1];
+              newMeeting2["wo"] = woUser.id;
+
+              Meeting.create(newMeeting1, err => {
+                if (err) throw err;
+                console.log(`Created first meeting`);
+
+                User.findOne({ email: "test@volunteer.com" }).then(
+                  transUser1 => {
+                    newMeeting2["translator"] = transUser1.id;
+
+                    Meeting.create(newMeeting2, err => {
+                      if (err) throw err;
+                      console.log(`Created second meeting`);
+
+                      Meeting.create(meetings[2], err => {
+                        if (err) throw err;
+                        console.log(`Created third meeting`);
+                        mongoose.connection.close();
+                      });
+                    });
+                  }
+                );
+              });
+            });
+          });
         });
       });
     });
