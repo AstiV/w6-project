@@ -4,8 +4,7 @@
 <form action="/profile/edit" method="post">
     <div class="form-group">
         <label for="username">Username</label>
-        <input id="username" type="text" name="username" class="form-control">
-        <span class="current-value">Current Username: {{translator.user.username}}</span>
+        <input id="username" type="text" name="username" class="form-control" value={{translator.user.username}}>
     </div>
 
     <div class="form-group">
@@ -13,7 +12,6 @@
         <label for="Volunteer">Volunteer</label>
         <input id="Volunteer" type="radio" name="role" class="form-control" value="Volunteer" onclick="ShowHidePrice()">
         <label for="Professional">Professional</label>
-
         <input id="Professional" type="radio" name="role" class="form-control" value="Professional" onclick="ShowHidePrice()">        {{#if
         translator.role}}
         <span class="current-value">Current Role: {{translator.role}}</span>
@@ -23,42 +21,33 @@
     {{#if isProfessional}}
     <div id="showPrice" class="form-group" style="display: block">
         <label for="price">Fee in € per hour</label>
-        <input id="price" type="number" name="price" class="form-control">
-        <span class="current-value">Current Fee: € {{translator.price}}</span>
+        <input id="price" type="number" name="price" class="form-control" value={{translator.price}}>
     </div>
     {{/if}}
 
     <div id="showPrice" class="form-group" style="display: none">
         <label for="price">Fee in € per hour</label>
-        <input id="price" type="number" name="price" class="form-control"> {{#if translator.price}}
-        <span class="current-value">Current Fee: € {{translator.price}}</span>
-        {{/if}}
+        <input id="price" type="number" name="price" class="form-control"> {{#if translator.price}} {{/if}}
     </div>
 
     <div class="form-group">
         <label for="email">E-Mail</label>
-        <input id="email" type="text" name="email" class="form-control">
-        <span class="current-value">Current E-Mail: {{translator.user.email}}</span>
+        <input id="email" type="text" name="email" class="form-control" value={{translator.user.email}}>
     </div>
 
     <div class="form-group">
         <label for="telephone">Phone Number</label>
-        <input id="telephone" type="tel" name="telephone" class="form-control" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">        {{#if
-        translator.telephone}}
-        <span class="current-value">Current Phone Number: {{translator.telephone}}</span>
-        {{/if}}
+        <input id="telephone" type="tel" name="telephone" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value={{translator.telephone}}>
     </div>
 
     <div class="form-group">
         <label for="location">Location</label>
-        <input id="location" type="text" name="location" class="form-control"> {{#if translator.location}}
-        <span class="current-value">Current Location: {{translator.location}}</span>
-        {{/if}}
+        <input id="location" type="text" name="location" class="form-control" value={{translator.location}}>
     </div>
 
     <div class="form-group">
 
-        <span class="current-value">Current Languages: </span>
+        <span class="current-value"><b>Languages</b></span>
         {{#each translator.languages}}
         <p>{{language}} -
             <span>{{level}}</span>
@@ -92,9 +81,7 @@
 
     <div class="form-group">
         <label for="background">Background</label>
-        <input id="background" type="text" name="background" class="form-control"> {{#if translator.background}}
-        <span class="current-value">Current Background: {{translator.background}}</span>
-        {{/if}}
+        <input id="background" type="text" name="background" class="form-control" value="{{translator.background}}">
     </div>
 
     <div class="form-group">
@@ -116,21 +103,17 @@
 <form action="/profile/edit" method="post">
     <div class="form-group">
         <label for="username">Username</label>
-        <input id="username" type="text" name="username" class="form-control">
-        <span class="current-value">Current Username: {{wo.user.username}}</span>
+        <input id="username" type="text" name="username" class="form-control" value={{wo.user.username}}>
     </div>
 
     <div class="form-group">
         <label for="email">E-Mail</label>
-        <input id="email" type="text" name="email" class="form-control">
-        <span class="current-value">Current E-Mail: {{wo.user.email}}</span>
+        <input id="email" type="text" name="email" class="form-control" value={{wo.user.email}}>
     </div>
 
     <div class="form-group">
         <label for="location">Location</label>
-        <input id="location" type="text" name="location" class="form-control"> {{#if wo.location}}
-        <span class="current-value">Current Location: {{wo.location}}</span>
-        {{/if}}
+        <input id="location" type="text" name="location" class="form-control" value={{wo.location}}>
     </div>
     <button type="submit">Save Changes</button>
 </form>
