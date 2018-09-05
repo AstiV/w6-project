@@ -7,13 +7,25 @@
 </div>
 {{/if}}
 
-<p>Role: {{translator.role}}</p>
+<div class="card-wrapper">
+    <div class="card-wrapper-headline">
+        <span>General Information</span>
+    </div>
+    <div class="info-text">
+        <p>Role: {{translator.role}}</p>
 
+        <p>Rating: {{translator.rating}}</p>
+    </div>
 
-{{#if translator.isProfessional}}
-<p>Fee: € {{translator.price}}/hr</p>
+</div>
+
+{{#if isProfessional}}
+<p>Fee: € {{translator.price}} /hr </p>
 {{/if}}
-<p>Rating: {{translator.rating}}</p>
+
+
+
+
 
 <p>E-Mail: {{translator.user.email}}</p>
 <p>Phone Number: {{translator.telephone}}</p>
