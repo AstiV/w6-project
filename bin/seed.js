@@ -13,19 +13,22 @@ const users = [
     email: "test@wo.com",
     password: bcrypt.hashSync("test", bcrypt.genSaltSync(8), null),
     username: "testwo",
+    name: "Hans Müller",
     role: "WO"
   },
   {
     email: "test@volunteer.com",
     password: bcrypt.hashSync("test", bcrypt.genSaltSync(8), null),
     username: "testvolunteer",
-    role: "Translator"
+    role: "Translator",
+    name: "Afolabi Taavi"
   },
   {
     email: "test@professional.com",
     password: bcrypt.hashSync("test", bcrypt.genSaltSync(8), null),
     username: "testprofessional",
-    role: "Translator"
+    role: "Translator",
+    name: "Gadisse Nehi"
   }
 ];
 
