@@ -24,7 +24,7 @@ router.get("/show", (req, res) => {
     WO.findOne({ user: id })
       .populate("user")
       .then(wo => {
-        res.render("profile", { wo });
+        res.render("profile/show", { wo });
       })
       .catch(console.error);
   } else if (req.user.role === "Translator") {
@@ -32,7 +32,7 @@ router.get("/show", (req, res) => {
       let translator = { ...translatorRaw }._doc;
       translator.background = translator.background.split(", ");
       translator.preferedSetting = translator.preferedSetting.split(", ");
-      res.render("profile", { translator });
+      res.render("profile/show", { translator });
     });
   }
 });
@@ -44,12 +44,12 @@ router.get("/edit", (req, res) => {
     WO.findOne({ user: id })
       .populate("user")
       .then(wo => {
-        res.render("edit", { wo });
+        res.render("profile/edit", { wo });
       })
       .catch(console.error);
   } else if (req.user.role === "Translator") {
     Translator.findOne({ user: id }).then(translator => {
-      res.render("edit", {
+      res.render("profile/edit", {
         translator,
         isProfessional: translator.role === "Professional"
       });
