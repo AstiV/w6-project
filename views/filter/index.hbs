@@ -1,0 +1,18 @@
+<h1>Here is the show route</h1>
+
+<form action="/filter/results" method="post">
+    <label for="language">Language</label>
+    <input type="text" name="language" id="language">
+
+    <label for="rating">Rating</label>
+    <input type="text" name="rating" id="rating">
+
+    <button type="submit">Filter</button>
+</form>
+
+{{#each translators}}
+<p>{{user.name}} </p>
+{{#each languages}}
+<p>{{language}} - {{level}}</p>
+
+{{/each}} {{/each}} {{translators}}
