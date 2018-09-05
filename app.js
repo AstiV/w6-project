@@ -22,6 +22,7 @@ const cookieParser = require("cookie-parser");
 const authRouter = require("./routes/auth");
 const profileRouter = require("./routes/profile");
 const meetingRouter = require("./routes/meeting");
+const filterRouter = require("./routes/filter");
 
 //MONGO SETUP
 //connect to MongoDB
@@ -165,6 +166,7 @@ app.use(passport.session());
 app.use("/", authRouter);
 app.use("/profile", profileRouter);
 app.use("/meeting", meetingRouter);
+app.use("/filter", filterRouter);
 
 app.listen(3000, () => {
   console.log(`server starting on port 3000`);
