@@ -14,7 +14,8 @@
         <input id="Volunteer" type="radio" name="role" class="form-control" value="Volunteer" onclick="ShowHidePrice()">
         <label for="Professional">Professional</label>
 
-        <input id="Professional" type="radio" name="role" class="form-control" value="Professional" onclick="ShowHidePrice()"> {{#if translator.role}}
+        <input id="Professional" type="radio" name="role" class="form-control" value="Professional" onclick="ShowHidePrice()">        {{#if
+        translator.role}}
         <span class="current-value">Current Role: {{translator.role}}</span>
         {{/if}}
     </div>
@@ -42,7 +43,8 @@
 
     <div class="form-group">
         <label for="telephone">Phone Number</label>
-        <input id="telephone" type="tel" name="telephone" class="form-control" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"> {{#if translator.telephone}}
+        <input id="telephone" type="tel" name="telephone" class="form-control" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">        {{#if
+        translator.telephone}}
         <span class="current-value">Current Phone Number: {{translator.telephone}}</span>
         {{/if}}
     </div>
@@ -99,7 +101,7 @@
         <label for="preferedSetting">Preferred Setting</label>
 
         {{!--
-        <input id="preferedSetting" type="text" name="preferedSetting" placeholder="Describe your setting preferences here..." class="form-control"> --}}
+        <input id="preferedSetting" type="text" name="preferedSetting" placeholder="Describe your setting preferences here..." class="form-control">        --}}
         <textarea cols="50" rows="3" name="preferedSetting">{{translator.preferedSetting}}</textarea>
 
     </div>
@@ -130,5 +132,6 @@
         <span class="current-value">Current Location: {{wo.location}}</span>
         {{/if}}
     </div>
+    <button type="submit">Save Changes</button>
 </form>
 {{/if}}
