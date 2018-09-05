@@ -25,6 +25,7 @@
         display: flex;
         justify-content: space-between;
         margin: 5rem auto;
+        position: relative;
     }
 
     .create-meeting-btn {
@@ -46,6 +47,16 @@
         font-size: 2.5rem;
         text-decoration: none;
         color: inherit;
+    }
+
+    .case-title a::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
     }
 
     .meeting-overview-header {
