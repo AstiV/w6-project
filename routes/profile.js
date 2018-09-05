@@ -61,6 +61,7 @@ router.post("/edit", (req, res) => {
   const { id } = req.user;
   const dataFromForm = req.body;
   const formattedFields = formatFields(dataFromForm);
+
   if (req.user.role === "Translator") {
     Translator.findOneAndUpdate(
       { user: id },
