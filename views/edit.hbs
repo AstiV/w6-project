@@ -1,7 +1,6 @@
 <h1>Edit your Profile</h1>
 
-{{#if translator}} {{!-- {{translator}} --}}
-
+{{#if translator}}
 <form action="/profile/edit" method="post">
     <div class="form-group">
         <label for="username">Username</label>
@@ -104,5 +103,25 @@
 
 </form>
 
+{{/if}} {{#if wo}}
+<form action="/profile/edit" method="post">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input id="username" type="text" name="username" class="form-control">
+        <span class="current-value">Current Username: {{wo.user.username}}</span>
+    </div>
+
+    <div class="form-group">
+        <label for="email">E-Mail</label>
+        <input id="email" type="text" name="email" class="form-control">
+        <span class="current-value">Current E-Mail: {{wo.user.email}}</span>
+    </div>
+
+    <div class="form-group">
+        <label for="location">Location</label>
+        <input id="location" type="text" name="location" class="form-control"> {{#if wo.location}}
+        <span class="current-value">Current Location: {{wo.location}}</span>
+        {{/if}}
+    </div>
+</form>
 {{/if}}
-<p>{{wo}}</p>

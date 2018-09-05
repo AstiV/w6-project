@@ -50,7 +50,15 @@
 <a href="/profile/edit">Edit Profile</a>
 
 {{/if}} {{#if wo}}
+<h1>Youth Welfare Officer Profile</h1>
+{{#if wo.profileImageUrl}}
+<div class="profile-img">
+    <img src="{{wo.profileImageUrl}}" alt="profile Image">
+</div>
+{{/if}}
 
-
-<p>Wo Page</p>
-{{wo}} {{/if}}
+<p>Username: {{wo.user.username}}</p>
+<p>Role: Youth Welfare Officer</p>
+<p>E-Mail: {{wo.user.email}}</p>
+<p>Location: {{wo.location}}</p>
+{{/if}}
