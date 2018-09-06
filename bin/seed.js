@@ -131,6 +131,7 @@ User.create(users, err => {
                 "https://res.cloudinary.com/adiya/image/upload/v1536243679/profilepicvolunteer.jpg",
             location: "München",
             languages: [{ language: "Dari", level: "C1" }],
+            price: 150,
             rating: 4,
             availability: "All day on Tuesday",
             background: "Professional translator, Lived 10 years on Madagascar",
