@@ -1,107 +1,126 @@
 {{#if translator}}
-<h1>{{translator.user.name}}</h1>
-<a class="btn-large" href="/profile/edit">Edit Profile</a>
 
-<div class="card-wrapper">
-    <div class="card-wrapper-headline">
-        <h2>General Information</h2>
+<div class="profile-wrapper">
+
+
+    <div class="name-wrapper">
+        <h1>{{translator.user.username}}</h1>
+        <div class="btn-large">
+            <a class="btn-link" href="/profile/edit">Edit Profile</a>
+        </div>
     </div>
-    <div class="general-wrapper">
-        {{#if translator.profileImageUrl}}
-        <div class="profile-img-wrapper">
-            <img class="profile-img" src="{{translator.profileImageUrl}}" alt="profile Image">
+
+
+
+    <div class="card-wrapper">
+        <div class="card-wrapper-headline">
+            <h2>General Information</h2>
         </div>
-        {{/if}} {{!--
-        <div class="image-wrapper">
-            <div class="image-placeholder"></div>
-        </div>
-        --}}
-        <div class="info-text-wrapper">
-            <div class="info-item">
-                <p><b>Role</b></p>
-                <p>{{translator.role}}</p>
+        <div class="general-wrapper">
+            {{#if translator.profileImageUrl}}
+            <div class="profile-img-wrapper">
+                <img class="profile-img" src="{{translator.profileImageUrl}}" alt="profile Image">
             </div>
+            {{/if}} {{!--
+            <div class="image-wrapper">
+                <div class="image-placeholder"></div>
+            </div>
+            --}}
+            <div class="info-text-wrapper">
+                <div class="info-item">
+                    <p><b>Role</b></p>
+                    <p>{{translator.role}}</p>
+                </div>
 
-            {{#if isProfessional}}
-            <div class="info-item">
-                <p><b>Fee (per hour)</b></p>
-                <p> € {{translator.price}}</p>
+                {{#if isProfessional}}
+                <div class="info-item">
+                    <p><b>Fee (per hour)</b></p>
+                    <p> € {{translator.price}}</p>
+                </div>
+                {{/if}}
+                <div class="info-item">
+                    <p><b>Rating</b></p>
+                    <p>{{translator.rating}}</p>
+                </div>
             </div>
-            {{/if}}
-            <div class="info-item">
-                <p><b>Rating</b></p>
-                <p>{{translator.rating}}</p>
+        </div>
+    </div>
+
+    <div class="card-wrapper">
+        <div class="card-wrapper-headline">
+            <h2>Contact Information</h2>
+        </div>
+        <div class="info-wrapper">
+            <div class="contact-location">
+                <p><b>Location</b></p>
+                <p>{{translator.location}}</p>
             </div>
+            <div class="contact-mail">
+                <p><b>E-Mail</b></p>
+                <p>{{translator.user.email}}</p>
+            </div>
+            <div class="contact-phone">
+                <p><b>Phone</b></p>
+                <p>{{translator.telephone}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-wrapper">
+        <div class="card-wrapper-headline">
+            <h2>Languages</h2>
+        </div>
+        <div class="info-wrapper">
+            <ul class="list">
+                {{#each translator.languages}}
+                <div class="list-language">
+                    <p><b>Language</b></p>
+                    <li>{{this.language}}</li>
+                </div>
+                <div class="list-level">
+                    <p><b>Level</b></p>
+                    <li>{{this.level}}</li>
+                </div>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-wrapper">
+        <div class="card-wrapper-headline">
+            <h2>Background</h2>
+        </div>
+        <div class="info-wrapper">
+            <ul class="list">
+                {{#each translator.background}}
+                <li class="tag">{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-wrapper">
+        <div class="card-wrapper-headline">
+            <h2>Preferred Setting</h2>
+        </div>
+        <div class="info-wrapper">
+            <ul class="list setting">
+                {{#each translator.preferedSetting}}
+                <li>{{this}}</li>
+                {{/each}}
+            </ul>
         </div>
     </div>
 </div>
 
-<div class="card-wrapper">
-    <div class="card-wrapper-headline">
-        <h2>Contact Information</h2>
-    </div>
-    <div class="info-wrapper">
-        <div class="contact-location">
-            <p><b>Location</b></p>
-            <p>{{translator.location}}</p>
-        </div>
-        <div class="contact-mail">
-            <p><b>E-Mail</b></p>
-            <p>{{translator.user.email}}</p>
-        </div>
-        <div class="contact-phone">
-            <p><b>Phone</b></p>
-            <p>{{translator.telephone}}</p>
-        </div>
-    </div>
-</div>
 
-<div class="card-wrapper">
-    <div class="card-wrapper-headline">
-        <h2>Languages</h2>
-    </div>
-    <div class="info-wrapper">
-        <ul class="list">
-            {{#each translator.languages}}
-            <div class="list-language">
-                <p><b>Language</b></p>
-                <li>{{this.language}}</li>
-            </div>
-            <div class="list-level">
-                <p><b>Level</b></p>
-                <li>{{this.level}}</li>
-            </div>
-            {{/each}}
-        </ul>
-    </div>
-</div>
 
-<div class="card-wrapper">
-    <div class="card-wrapper-headline">
-        <h2>Background</h2>
-    </div>
-    <div class="info-wrapper">
-        <ul class="list">
-            {{#each translator.background}}
-            <li class="tag">{{this}}</li>
-            {{/each}}
-        </ul>
-    </div>
-</div>
 
-<div class="card-wrapper">
-    <div class="card-wrapper-headline">
-        <h2>Preferred Setting</h2>
-    </div>
-    <div class="info-wrapper">
-        <ul class="list setting">
-            {{#each translator.preferedSetting}}
-            <li>{{this}}</li>
-            {{/each}}
-        </ul>
-    </div>
-</div>
-</div>
+
+
+
+
+
 
 
 {{/if}} {{#if wo}}
@@ -112,7 +131,6 @@
 </div>
 {{/if}}
 
-<p>Name: {{wo.user.name}}</p>
 <p>Username: {{wo.user.username}}</p>
 <p>Role: Youth Welfare Officer</p>
 <p>E-Mail: {{wo.user.email}}</p>

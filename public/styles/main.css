@@ -1,7 +1,9 @@
 :root {
-    --main-primary-color: #0a369d;
+    --main-primary-color: rgb(48, 63, 159);
     --background-grey-color: #cfdee7;
     --main-text-light: white;
+    --headline-text: rgb(85, 85, 85);
+    --card-border: rgb(229, 229, 229);
     --color-waiting: rgba(255, 190, 71, 0.637);
     --color-confirmed: rgba(143, 213, 148, 0.61);
     --color-cancelled: rgba(242, 94, 92, 0.658);
@@ -18,18 +20,23 @@ html {
 }
 
 body {
-    background-color: var(--background-grey-color);
     font-family: "M PLUS 1p", sans-serif;
     font-size: 1.7rem;
+    background-color: rgb(255, 255, 255);
 }
 
-.body-container {
-  background-color: white;
-  margin: 0 auto;
-  width: 80vw;
-  height: 100%;
-  padding: 5rem;
+h1,
+h2 {
+    color: var(--headline-text);
 }
+
+/* .body-container {
+    background-color: white;
+    margin: 0 auto;
+    width: 80vw;
+    height: 100%;
+    padding: 5rem;
+} */
 
 nav {
     display: flex;
@@ -89,7 +96,7 @@ nav a {
     width: 70%;
     height: 60vh;
     margin-bottom: 2%;
-    border: 1.5px solid rgb(229, 229, 229);
+    border: 1.5px solid #e5e5e5;
     border-top: 2.5px solid coral;
     border-radius: 0 0 5px 5px;
 }
