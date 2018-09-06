@@ -170,11 +170,17 @@ nav a {
     margin-right: 10px;
 }
 
+.list-wrapper {
+    height: 70%;
+    padding: 13% 0 0 7%;
+}
+
 .list .tag {
     margin-right: 10px;
-    padding: 7px;
-    border: 1.5px solid rgb(229, 229, 229);
-    width: 50%;
+    margin-top: 50px;
+    padding: 2px 20px;
+    border: 1.5px solid var(--card-border);
+    border-radius: 45px;
 }
 
 .form-wrapper {

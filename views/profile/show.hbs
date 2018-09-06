@@ -88,25 +88,15 @@
 
     <div class="card-wrapper">
         <div class="card-wrapper-headline">
-            <h2>Background</h2>
+            <h2>Preferred Settings & Background</h2>
         </div>
-        <div class="info-wrapper">
+        <div class="list-wrapper">
+            <ul class="list setting">
+                {{translator.preferedSetting}}
+            </ul>
             <ul class="list">
                 {{#each translator.background}}
                 <li class="tag">{{this}}</li>
-                {{/each}}
-            </ul>
-        </div>
-    </div>
-
-    <div class="card-wrapper">
-        <div class="card-wrapper-headline">
-            <h2>Preferred Setting</h2>
-        </div>
-        <div class="info-wrapper">
-            <ul class="list setting">
-                {{#each translator.preferedSetting}}
-                <li>{{this}}</li>
                 {{/each}}
             </ul>
         </div>
