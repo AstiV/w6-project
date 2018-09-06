@@ -11,168 +11,170 @@ const fs = require("fs");
 
 //use this middleware at every request to check if user is logged in
 router.use((req, res, next) => {
-  //if there is not a running session with a user
-  if (!req.user) {
-    res.render("index", {
-      message: "You must be logged in to view this page"
-    });
-  } else {
-    next();
-  }
+    //if there is not a running session with a user
+    if (!req.user) {
+        res.render("index", {
+            message: "You must be logged in to view this page"
+        });
+    } else {
+        next();
+    }
 });
 
 router.use(fileUpload());
 
 router.get("/show", (req, res) => {
-  const { id } = req.user;
-  if (req.user.role === "WO") {
-    WO.findOne({ user: id })
-      .populate("user")
-      .then(wo => {
-        res.render("profile/show", { wo });
-      })
-      .catch(console.error);
-  } else if (req.user.role === "Translator") {
-    Translator.findOne({ user: id }).then(translatorRaw => {
-      let translator = { ...translatorRaw }._doc;
-      translator.background = translator.background.split(", ");
-      translator.preferedSetting = translator.preferedSetting.split(", ");
-      res.render("profile/show", { translator });
-    });
-  }
+    const { id } = req.user;
+    if (req.user.role === "WO") {
+        WO.findOne({ user: id })
+            .populate("user")
+            .then(wo => {
+                res.render("profile/show", { wo });
+            })
+            .catch(console.error);
+    } else if (req.user.role === "Translator") {
+        Translator.findOne({ user: id }).then(translatorRaw => {
+            let translator = { ...translatorRaw }._doc;
+            translator.background = translator.background.split(", ");
+            translator.preferedSetting = translator.preferedSetting.split(", ");
+            res.render("profile/show", {
+                translator,
+                isProfessional: translator.role === "Professional"
+            });
+        });
+    }
 });
 
 router.get("/edit", (req, res) => {
-  const { id } = req.user;
+    const { id } = req.user;
 
-  if (req.user.role === "WO") {
-    WO.findOne({ user: id })
-      .populate("user")
-      .then(wo => {
-        res.render("profile/edit", { wo, isWO: wo.role === "WO" });
-      })
-      .catch(console.error);
-  } else if (req.user.role === "Translator") {
-    Translator.findOne({ user: id }).then(translator => {
-      res.render("profile/edit", {
-        translator,
-        isProfessional: translator.role === "Professional"
-      });
-    });
-  }
+    if (req.user.role === "WO") {
+        WO.findOne({ user: id })
+            .populate("user")
+            .then(wo => {
+                res.render("profile/edit", { wo, isWO: wo.role === "WO" });
+            })
+            .catch(console.error);
+    } else if (req.user.role === "Translator") {
+        Translator.findOne({ user: id }).then(translator => {
+            res.render("profile/edit", {
+                translator,
+                isProfessional: translator.role === "Professional"
+            });
+        });
+    }
 });
 router.post("/edit", (req, res) => {
-  //TODO implement overwriting of db data
-  const { id } = req.user;
-  const dataFromForm = req.body;
-  const formattedFields = formatFields(dataFromForm);
-  let profileImageName;
-  let pictureWasUploaded = false;
+    //TODO implement overwriting of db data
+    const { id } = req.user;
+    const dataFromForm = req.body;
+    const formattedFields = formatFields(dataFromForm);
+    let profileImageName;
+    let pictureWasUploaded = false;
 
-  if (req.user.role === "Translator") {
-    if (Object.keys(req.files).length > 0) {
-      uploadPicture({
-        req,
-        formattedFields,
-        id,
-        pictureWasUploaded,
-        profileImageName,
-        res
-      });
-    } else {
-      console.log("translator -> create translator");
-      createTranslator({
-        id,
-        formattedFields,
-        pictureWasUploaded,
-        profileImageName,
-        res
-      });
-    }
-  } else if (req.user.role === "WO") {
-    WO.findOneAndUpdate(
-      { user: id },
-      { $set: formattedFields.translatorModelFields },
-      { new: true },
-      function(err, doc) {
-        if (err) {
-          console.log("Something wrong when updating translator model data!");
+    if (req.user.role === "Translator") {
+        if (Object.keys(req.files).length > 0) {
+            uploadPicture({
+                req,
+                formattedFields,
+                id,
+                pictureWasUploaded,
+                profileImageName,
+                res
+            });
+        } else {
+            console.log("translator -> create translator");
+            createTranslator({
+                id,
+                formattedFields,
+                pictureWasUploaded,
+                profileImageName,
+                res
+            });
         }
-        User.findOneAndUpdate(
-          { _id: id },
-          { $set: formattedFields.userModelFields },
-          { new: true },
-          function(err, doc) {
-            if (err) {
-              console.log("Something wrong when updating user model data!");
+    } else if (req.user.role === "WO") {
+        WO.findOneAndUpdate(
+            { user: id },
+            { $set: formattedFields.translatorModelFields },
+            { new: true },
+            function(err, doc) {
+                if (err) {
+                    console.log("Something wrong when updating translator model data!");
+                }
+                User.findOneAndUpdate(
+                    { _id: id },
+                    { $set: formattedFields.userModelFields },
+                    { new: true },
+                    function(err, doc) {
+                        if (err) {
+                            console.log("Something wrong when updating user model data!");
+                        }
+                        res.redirect("/profile/show");
+                    }
+                );
             }
-            res.redirect("/profile/show");
-          }
         );
-      }
-    );
-  }
+    }
 });
 
 function createTranslator(arg) {
-  const {
-    formattedFields,
-    id,
+    const {
+        formattedFields,
+        id,
 
-    profileImageName,
-    res
-  } = arg;
-  let { pictureWasUploaded } = arg;
+        profileImageName,
+        res
+    } = arg;
+    let { pictureWasUploaded } = arg;
 
-  Translator.findOneAndUpdate(
-    { user: id },
-    { $set: formattedFields.translatorModelFields },
-    { new: true },
-    function(err, doc) {
-      if (err) {
-        console.log("Something wrong when updating translator model data!");
-      }
-      User.findOneAndUpdate(
-        { _id: id },
-        { $set: formattedFields.userModelFields },
+    Translator.findOneAndUpdate(
+        { user: id },
+        { $set: formattedFields.translatorModelFields },
         { new: true },
         function(err, doc) {
-          if (err) {
-            console.log("Something wrong when updating user model data!");
-          }
-          if (pictureWasUploaded) {
-            fs.unlinkSync(`./public/images/${profileImageName}`);
-            pictureWasUploaded = false;
-          }
-          res.redirect("/profile/show");
+            if (err) {
+                console.log("Something wrong when updating translator model data!");
+            }
+            User.findOneAndUpdate(
+                { _id: id },
+                { $set: formattedFields.userModelFields },
+                { new: true },
+                function(err, doc) {
+                    if (err) {
+                        console.log("Something wrong when updating user model data!");
+                    }
+                    if (pictureWasUploaded) {
+                        fs.unlinkSync(`./public/images/${profileImageName}`);
+                        pictureWasUploaded = false;
+                    }
+                    res.redirect("/profile/show");
+                }
+            );
         }
-      );
-    }
-  );
+    );
 }
 
 function uploadPicture(arg) {
-  const { req, formattedFields, id, res } = arg;
-  let { pictureWasUploaded, profileImageName } = arg;
-  pictureWasUploaded = true;
+    const { req, formattedFields, id, res } = arg;
+    let { pictureWasUploaded, profileImageName } = arg;
+    pictureWasUploaded = true;
 
-  let profileImage = req.files.profileImageUrl;
-  profileImageName = req.files.profileImageUrl.name;
-  // Use the mv() method to place the file somewhere on your server
-  profileImage.mv(`./public/images/${profileImageName}`, function(err) {
-    if (err) return res.status(500).send(err);
-    upload(`./public/images/${profileImageName}`).then(result => {
-      formattedFields.translatorModelFields["profileImageUrl"] =
-        result.secure_url;
-      createTranslator({
-        id,
-        formattedFields,
-        pictureWasUploaded,
-        profileImageName,
-        res
-      });
+    let profileImage = req.files.profileImageUrl;
+    profileImageName = req.files.profileImageUrl.name;
+    // Use the mv() method to place the file somewhere on your server
+    profileImage.mv(`./public/images/${profileImageName}`, function(err) {
+        if (err) return res.status(500).send(err);
+        upload(`./public/images/${profileImageName}`).then(result => {
+            formattedFields.translatorModelFields["profileImageUrl"] = result.secure_url;
+            createTranslator({
+                id,
+                formattedFields,
+                pictureWasUploaded,
+                profileImageName,
+                res
+            });
+        });
     });
-  });
 }
 
 module.exports = router;
