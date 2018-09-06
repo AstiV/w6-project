@@ -4,7 +4,7 @@
 
 
     <div class="name-wrapper">
-        <h1>{{translator.user.username}}</h1>
+        <h1>{{translator.user.name}}</h1>
         <div class="btn-large">
             <a class="btn-link" href="/profile/edit">Edit Profile</a>
         </div>
@@ -116,24 +116,42 @@
 
 
 
-
-
-
-
-
-
-
 {{/if}} {{#if wo}}
-<h1>{{wo.user.name}}</h1>
-{{#if wo.profileImageUrl}}
-<div class="profile-img-wrapper">
-    <img "profile-img" src="{{wo.profileImageUrl}}" alt="profile Image">
-</div>
-{{/if}}
 
-<p>Username: {{wo.user.username}}</p>
-<p>Role: Youth Welfare Officer</p>
-<p>E-Mail: {{wo.user.email}}</p>
-<p>Location: {{wo.location}}</p>
+<div class="profile-wrapper">
 
-{{/if}}
+    <div class="name-wrapper">
+        <h1>{{wo.user.name}}</h1>
+        <div class="btn-large">
+            <a class="btn-link" href="/profile/edit">Edit Profile</a>
+        </div>
+    </div>
+
+    <div class="card-wrapper">
+        <div class="card-wrapper-headline">
+            <h2>General Information</h2>
+        </div>
+        <div class="general-wrapper">
+            {{#if wo.profileImageUrl}}
+            <div class="profile-img-wrapper">
+                <img class="profile-img" src="{{wo.profileImageUrl}}" alt="profile Image">
+            </div>
+            {{/if}}
+
+            <div class="info-text-wrapper">
+                <div class="info-item">
+                    <p><b>Role</b></p>
+                    <p>Youth Welfare Officer</p>
+                </div>
+                <div class="info-item">
+                    <p><b>E-Mail</b></p>
+                    <p>{{wo.user.email}}</p>
+                </div>
+                <div class="info-item">
+                    <p><b>Location</b></p>
+                    <p>{{wo.location}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/if}}
