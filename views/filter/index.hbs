@@ -1,15 +1,27 @@
 <h1>Here is the show route</h1>
 
 <form action="/filter/results" method="post">
-    <label for="language">Language</label>
-    <input type="text" name="language" id="language">
+    <label for="language">Language:</label>
+    <label for="language">Add Language</label>
+    <select name="language" id="language">
+        <option value=""></option>
+        <option value="Oromo">Oromo</option>
+        <option value="Dari">Dari</option>
+        <option value="Fula">Fula</option>
+        <option value="Maninka">Maninka</option>
+        <option value="Tigrinya">Tigrinya</option>
+        <option value="Wolof">Wolof</option>
+    </select>
 
-    <label for="rating">Rating</label>
-    <input type="text" name="rating" id="rating">
+    <label for="minRating">Min Rating:</label>
+    <input type="text" name="minRating" id="minRating">
 
     <button type="submit">Filter</button>
 </form>
 
+
+<p>Search results:</p>
+<p>{{message}}</p>
 {{#each translators}}
 <p>{{user.name}} </p>
 {{#each languages}}

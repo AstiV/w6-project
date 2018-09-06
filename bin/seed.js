@@ -77,7 +77,7 @@ User.create(users, err => {
         { language: "Oromo", level: "B2" },
         { language: "Maninka", level: "B1" }
       ],
-      rating: "4",
+      rating: 4,
       availability: "Mondays from 14.00",
       background: "Doctor, Father of 2 daughters",
       preferedSetting: "No preferences"
@@ -100,8 +100,8 @@ User.create(users, err => {
         { language: "Tigrinya", level: "C1" },
         { language: "Wolof", level: "C1" }
       ],
-      price: "100",
-      rating: "5",
+      price: 100,
+      rating: 5,
       availability: "Call to make an appointment",
       background: "Professional translator, Expertise in art",
       preferedSetting: "No preferences"
