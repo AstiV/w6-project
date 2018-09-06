@@ -130,22 +130,31 @@ router.post("/create", (req, res) => {
   } = req.body;
 
   User.findOne({ email: woEmail }).then(wo => {
-    User.findOne({ email: translatorEmail }).then(translator => {
-      new Meeting({
-        title,
-        wo: wo._id,
-        translator: translator._id,
-        participants,
-        caseInfo,
-        address,
-        date,
-        time
+    User.findOne({ email: translatorEmail })
+      .then(translator => {
+        new Meeting({
+          title,
+          wo: wo._id,
+          translator: translator._id,
+          participants,
+          caseInfo,
+          address,
+          date,
+          time
+        })
+          .save()
+          .then(meeting => {
+            res.redirect("/meeting/");
+          })
+          .catch(err => {
+            res.send(err);
+          });
       })
-        .save()
-        .then(meeting => {
-          res.redirect("/meeting/");
+      .catch(() => {
+        res.render("meeting/create", {
+          message: "The email you entered doesn't exist"
         });
-    });
+      });
   });
 });
 
