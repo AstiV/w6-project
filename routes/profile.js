@@ -35,9 +35,22 @@ router.get("/show", (req, res) => {
   } else if (req.user.role === "Translator") {
     Translator.findOne({ user: id }).then(translatorRaw => {
       let translator = { ...translatorRaw }._doc;
-      translator.background = translator.background.split(", ");
-      translator.preferedSetting = translator.preferedSetting.split(", ");
-      res.render("profile/show", { translator });
+      if (
+        translator.background.includes(",") &&
+        translator.preferedSetting.includes(",")
+      ) {
+        translator.background = translator.background.split(", ");
+        translator.preferedSetting = translator.preferedSetting.split(", ");
+      }
+      if (translator.background.includes(",")) {
+        translator.background = translator.background.split(", ");
+      } else if (translator.preferedSetting.includes(",")) {
+        translator.preferedSetting = translator.preferedSetting.split(", ");
+      }
+      res.render("profile/show", {
+        translator,
+        isProfessional: translator.role === "Professional"
+      });
     });
   }
 });
@@ -115,23 +128,31 @@ router.post("/edit", (req, res) => {
 });
 
 function createTranslator(arg) {
-  const {
-    formattedFields,
-    id,
-
-    profileImageName,
-    res
-  } = arg;
+  const { formattedFields, id, profileImageName, res } = arg;
   let { pictureWasUploaded } = arg;
-
+  console.log("id", id);
+  console.log("create translator -> ", formattedFields.translatorModelFields);
+  const {
+    role,
+    rating,
+    price,
+    profileImageUrl,
+    location,
+    languages
+  } = formattedFields.translatorModelFields;
   Translator.findOneAndUpdate(
     { user: id },
-    { $set: formattedFields.translatorModelFields },
+    {
+      $set: {
+        profileImageUrl: formattedFields.translatorModelFields.profileImageUrl
+      }
+    },
     { new: true },
     function(err, doc) {
       if (err) {
         console.log("Something wrong when updating translator model data!");
       }
+      console.log(doc);
       User.findOneAndUpdate(
         { _id: id },
         { $set: formattedFields.userModelFields },
@@ -152,6 +173,7 @@ function createTranslator(arg) {
 }
 
 function uploadPicture(arg) {
+  console.log("picture upload");
   const { req, formattedFields, id, res } = arg;
   let { pictureWasUploaded, profileImageName } = arg;
   pictureWasUploaded = true;
@@ -164,6 +186,8 @@ function uploadPicture(arg) {
     upload(`./public/images/${profileImageName}`).then(result => {
       formattedFields.translatorModelFields["profileImageUrl"] =
         result.secure_url;
+      //   console.log(formattedFields);
+
       createTranslator({
         id,
         formattedFields,

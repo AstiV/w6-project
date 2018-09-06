@@ -1,7 +1,53 @@
-<h1>Here is the show route</h1>
+<style>
+    .translator-card img {
+        width: 20rem;
+        border-radius: 50%;
+        top: 25%;
+        border: 3px solid rgba(190, 190, 190, 0.322);
+    }
+
+    .translator-card {
+        border: 1px solid rgba(190, 190, 190, 0.322);
+        display: flex;
+        margin: 3rem auto;
+        padding: 2rem;
+        background: linear-gradient(rgba(168, 168, 168, 0.473) 40%, white 40%);
+        width: 80rem;
+    }
+
+    .translator-card div {
+        margin: 0 3rem;
+    }
+
+    .name {
+        font-size: 4rem;
+        margin: 4rem 0;
+    }
+
+    form {
+        margin: -5rem auto 0;
+        height: 20rem;
+        padding: 4rem 0 0;
+    }
+
+    form * {
+        margin: 2rem;
+    }
+
+
+    label {
+        width: 100%;
+    }
+
+    hr {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    }
+</style>
 
 <form action="/filter/results" method="post">
-    <label for="language">Language:</label>
+
     <label for="language">Add Language</label>
     <select name="language" id="language">
         <option value=""></option>
@@ -19,12 +65,35 @@
     <button type="submit">Filter</button>
 </form>
 
+<hr>
 
-<p>Search results:</p>
+
 <p>{{message}}</p>
 {{#each translators}}
-<p>{{user.name}} </p>
-{{#each languages}}
-<p>{{language}} - {{level}}</p>
+<div class="translator-card">
+    <div>
+        <img src="{{profileImageUrl}}" alt="">
+    </div>
+    <div>
+        <p class="name">{{user.name}} </p>
+        <p>Rating: {{rating}} </p>
+        <p>Location: {{location}} </p>
+        <p>Availability: {{availability}} </p>
+        <p>Telephone: {{telephone}} </p>
+        <p>Background:
+            <span class="background">{{background}}</span>
+        </p>
+        <p>Preferred Setting:
+            <span class="preferedSetting">{{preferedSetting}}</span>
+        </p>
+        {{#each languages}}
+        <p>{{language}} - {{level}}</p>
+        {{/each}}
+    </div>
+</div>
 
-{{/each}} {{/each}} {{translators}}
+{{/each}}
+
+<script>
+
+</script>

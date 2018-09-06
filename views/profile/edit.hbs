@@ -2,129 +2,165 @@
 
 {{#if translator}}
 <form action="/profile/edit" method="post" encType="multipart/form-data">
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input id="username" type="text" name="username" class="form-control" value={{translator.user.username}}>
-    </div>
 
-    <div class="form-group">
-        <label for="profileImageUrl">Change Profile Picture</label>
-        <input type="file" name="profileImageUrl" id="profileImageUrl">
-    </div>
-
-    <div class="form-group">
-        <p>Role</p>
-        <label for="Volunteer">Volunteer</label>
-        <input id="Volunteer" type="radio" name="role" class="form-control" value="Volunteer" onclick="ShowHidePrice()">
-        <label for="Professional">Professional</label>
-
-        <input id="Professional" type="radio" name="role" class="form-control" value="Professional" onclick="ShowHidePrice()"> {{#if translator.role}}
-
-        <span class="current-value">Current Role: {{translator.role}}</span>
-        {{/if}}
-    </div>
-
-    {{#if isProfessional}}
-    <div id="showPrice" class="form-group" style="display: block">
-        <label for="price">Fee in € per hour</label>
-        <input id="price" type="number" name="price" class="form-control" value={{translator.price}}>
-    </div>
-    {{/if}}
-
-    <div id="showPrice" class="form-group" style="display: none">
-        <label for="price">Fee in € per hour</label>
-        <input id="price" type="number" name="price" class="form-control"> {{#if translator.price}} {{/if}}
-    </div>
-
-    <div class="form-group">
-        <label for="email">E-Mail</label>
-        <input id="email" type="text" name="email" class="form-control" value={{translator.user.email}}>
-    </div>
-
-    <div class="form-group">
-        <label for="telephone">Phone Number</label>
-
-        <input id="telephone" type="tel" name="telephone" class="form-control" value={{translator.telephone}}>
-    </div>
-
-    <div class="form-group">
-        <label for="location">Location</label>
-        <input id="location" type="text" name="location" class="form-control" value={{translator.location}}>
-    </div>
-
-    <div class="form-group">
-
-        <span class="current-value">
-            <b>Languages</b>
-        </span>
-        {{#each translator.languages}}
-        <p>{{language}} -
-            <span>{{level}}</span>
-        </p>
-        <input type="hidden" name="language" value={{language}}>
-        <input type="hidden" name="level" value={{level}}> {{/each}}
-        <div id="language-input-wrapper">
-            <label for="language">Add Language</label>
-            <select name="language" id="language">
-                <option value=""></option>
-                <option value="Oromo">Oromo</option>
-                <option value="Dari">Dari</option>
-                <option value="Fula">Fula</option>
-                <option value="Maninka">Maninka</option>
-                <option value="Tigrinya">Tigrinya</option>
-                <option value="Wolof">Wolof</option>
-            </select>
-            <label for="level">Level</label>
-            <select name="level" id="level">
-                <option value=""></option>
-                <option value="A1">A1</option>
-                <option value="A2">A2</option>
-                <option value="B1">B1</option>
-                <option value="B2">B2</option>
-                <option value="C1">C1</option>
-                <option value="C2">C2</option>
-            </select>
+    <div class="form-wrapper">
+        <div class="form-wrapper-headline">
+            <h2>General Information</h2>
         </div>
-        <button type="button" id="add-input-btn">+</button>
+        <div class="form-group-wrapper">
+            <div class="form-group">
+                <label for="username"><b>Username</b></label>
+                <input id="username" type="text" name="username" class="form-control" value="{{translator.user.username}}">
+            </div>
+
+            <div class="form-group">
+                <label for="profileImageUrl"><b>Change Profile Picture</b></label>
+                <input type="file" name="profileImageUrl" id="profileImageUrl">
+            </div>
+
+            <div class="form-group">
+                <p><b>Role</b></p>
+                <label for="Volunteer">Volunteer</label>
+                <input id="Volunteer" type="radio" name="role" class="form-control" value="Volunteer" onclick="ShowHidePrice()">
+                <label for="Professional">Professional</label>
+
+                <input id="Professional" type="radio" name="role" class="form-control" value="Professional" onclick="ShowHidePrice()">                {{#if
+                translator.role}}
+
+                <span class="current-value"><b>Current Role</b> {{translator.role}}</span>
+                {{/if}}
+            </div>
+
+            {{#if isProfessional}}
+            <div id="showPrice" class="form-group" style="display: block">
+                <label for="price"><b>Fee (per hour)</b></label>
+                <input id="price" type="number" name="price" class="form-control" value="{{translator.price}}">
+            </div>
+            {{/if}}
+
+            <div id="showPrice" class="form-group" style="display: none">
+                <label for="price">Fee in € per hour</label>
+                <input id="price" type="number" name="price" class="form-control"> {{#if translator.price}} {{/if}}
+            </div>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label for="background">Background</label>
-        <input id="background" type="text" name="background" class="form-control" value="{{translator.background}}">
+    <div class="form-wrapper">
+        <div class="form-wrapper-headline">
+            <h2>Contact Information</h2>
+        </div>
+        <div class="form-group-wrapper">
+            <div class="form-group">
+                <label for="location"><b>Location</b></label>
+                <input id="location" type="text" name="location" class="form-control" value="{{translator.location}}">
+            </div>
+            <div class="form-group">
+                <label for="email"><b>E-Mail</b></label>
+                <input id="email" type="text" name="email" class="form-control" value="{{translator.user.email}}">
+            </div>
+
+            <div class="form-group">
+                <label for="telephone"><b>Phone</b></label>
+
+                <input id="telephone" type="tel" name="telephone" class="form-control" value="{{translator.telephone}}">
+            </div>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label for="preferedSetting">Preferred Setting</label>
+    <div class="form-wrapper">
+        <div class="form-wrapper-headline">
+            <h2>Languages</h2>
+        </div>
+        <div class="form-group-wrapper">
+            <div class="form-group">
+                <div class="current-value-wrapper">
+                    <span class="current-value">
+                        <b>Current Languages</b>
+                    </span>
+                    {{#each translator.languages}}
+                    <p>{{language}} -
+                        <span>{{level}}</span>
+                    </p>
+                    <input type="hidden" name="language" value="{{language}}">
+                    <input type="hidden" name="level" value="{{level}}"> {{/each}}
+                </div>
 
-        {{!--
-        <input id="preferedSetting" type="text" name="preferedSetting" placeholder="Describe your setting preferences here..." class="form-control"> --}}
-        <textarea cols="50" rows="3" name="preferedSetting">{{translator.preferedSetting}}</textarea>
-
+                <div id="language-input-wrapper">
+                    <label for="language">Add Language</label>
+                    <select name="language" id="language">
+                        <option value=""></option>
+                        <option value="Oromo">Oromo</option>
+                        <option value="Dari">Dari</option>
+                        <option value="Fula">Fula</option>
+                        <option value="Maninka">Maninka</option>
+                        <option value="Tigrinya">Tigrinya</option>
+                        <option value="Wolof">Wolof</option>
+                    </select>
+                    <label for="level">Level</label>
+                    <select name="level" id="level">
+                        <option value=""></option>
+                        <option value="A1">A1</option>
+                        <option value="A2">A2</option>
+                        <option value="B1">B1</option>
+                        <option value="B2">B2</option>
+                        <option value="C1">C1</option>
+                        <option value="C2">C2</option>
+                    </select>
+                </div>
+                <button type="button" id="add-input-btn">+</button>
+            </div>
+        </div>
     </div>
 
+    <div class="form-wrapper">
+        <div class="form-wrapper-headline">
+            <h2>Preferred Settings & Background</h2>
+        </div>
+        <div class="form-group-wrapper">
+            <div class="form-group">
+                <label for="preferedSetting">Preferred Setting</label>
 
-    <button type="submit">Save Changes</button>
+                {{!--
+                <input id="preferedSetting" type="text" name="preferedSetting" placeholder="Describe your setting preferences here..." class="form-control">                --}}
+                <textarea cols="50" rows="3" name="preferedSetting">{{translator.preferedSetting}}</textarea>
+            </div>
+            <div class="form-group background">
+                <label for="background">Background</label>
+                <input id="background" type="text" name="background" class="form-control" value="{{translator.background}}">
+            </div>
+        </div>
+    </div>
+
+    <div class="submit-wrapper">
+        <button type="submit">Save Changes</button>
+    </div>
 
 
 </form>
 
 {{/if}} {{#if wo}}
+
 <form action="/profile/edit" method="post" encType="multipart/form-data">
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input id="username" type="text" name="username" class="form-control" value={{wo.user.username}}>
+    <div class="form-wrapper">
+        <div class="form-group">
+            <label for="username"><b>Username</b></label>
+            <input id="username" type="text" name="username" class="form-control" value="{{wo.user.username}}">
 
-    </div>
+        </div>
 
-    <div class="form-group">
-        <label for="email">E-Mail</label>
-        <input id="email" type="text" name="email" class="form-control" value={{wo.user.email}}>
-    </div>
+        <div class="form-group">
+            <label for="email"><b>E-Mail</b></label>
+            <input id="email" type="text" name="email" class="form-control" value="{{wo.user.email}}">
+        </div>
 
-    <div class="form-group">
-        <label for="location">Location</label>
-        <input id="location" type="text" name="location" class="form-control" value={{wo.location}}>
+        <div class="form-group">
+            <label for="location"><b>Location</b></label>
+            <input id="location" type="text" name="location" class="form-control" value="{{wo.location}}">
+        </div>
     </div>
-    <button type="submit">Save Changes</button>
+    <div class="submit-wrapper">
+        <button type="submit">Save Changes</button>
+    </div>
 </form>
+
 {{/if}}

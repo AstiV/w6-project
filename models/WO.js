@@ -12,7 +12,7 @@ const woSchema = Schema({
   profileImageUrl: {
     type: String
   },
-  idNumber: { type: String, unique: true }
+  idNumber: { type: String }
 });
 
 woSchema.plugin(autopopulate);
