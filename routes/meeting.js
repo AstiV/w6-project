@@ -4,28 +4,26 @@ const Meeting = require("../models/Meeting");
 const User = require("../models/User");
 const { ensureLoggedIn, ensureLoggedOut } = require("connect-ensure-login");
 
-//use this middleware at every request to check if user is wo
+// use this middleware at every request to check if user is wo
 router.use((req, res, next) => {
   //if there is not a running session with a user
   if (!req.user) {
     res.render("index", { message: "You must be logged in to view this page" });
-  } else if (req.user.role !== "WO") {
-    res.render("index", {
-      message: "You must be logged in as Wellfare officer to create a meeting"
-    });
   } else {
     next();
   }
 });
 
 router.get("/", (req, res) => {
-  Meeting.find({}).then(meetings => {
+  const role = req.user.role.toLowerCase();
+  const query = {};
+  query[req.user.role.toLowerCase()] = req.user._id;
+  Meeting.find(query).then(meetings => {
     if (meetings.length < 1) {
       res.render("meeting/index", {
         message: "There are no meetings, please create one"
       });
     }
-
     res.render("meeting/index", { meetings });
   });
 });
