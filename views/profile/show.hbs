@@ -124,10 +124,10 @@
 
 
 {{/if}} {{#if wo}}
-<h1>Youth Welfare Officer Profile</h1>
+<h1>{{wo.user.name}}</h1>
 {{#if wo.profileImageUrl}}
-<div class="profile-img">
-    <img src="{{wo.profileImageUrl}}" alt="profile Image">
+<div class="profile-img-wrapper">
+    <img "profile-img" src="{{wo.profileImageUrl}}" alt="profile Image">
 </div>
 {{/if}}
 
@@ -135,4 +135,5 @@
 <p>Role: Youth Welfare Officer</p>
 <p>E-Mail: {{wo.user.email}}</p>
 <p>Location: {{wo.location}}</p>
+
 {{/if}}
