@@ -225,10 +225,23 @@ nav a {
 
 .submit-wrapper {
     text-align: center;
+    margin: 30px;
 }
 
 .form-wrapper-headline {
     border-bottom: 1.5px solid rgb(229, 229, 229);
     padding: 3%;
     margin-bottom: 1%;
+}
+
+.current-value-wrapper {
+    margin-bottom: 20px;
+}
+
+.language-input-wrapper {
+    width: 500px;
+}
+
+.form-group.background {
+    margin-top: 30px;
 }

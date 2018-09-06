@@ -73,15 +73,18 @@
         </div>
         <div class="form-group-wrapper">
             <div class="form-group">
-                <span class="current-value">
-                    <b>Current Languages</b>
-                </span>
-                {{#each translator.languages}}
-                <p>{{language}} -
-                    <span>{{level}}</span>
-                </p>
-                <input type="hidden" name="language" value="{{language}}">
-                <input type="hidden" name="level" value="{{level}}"> {{/each}}
+                <div class="current-value-wrapper">
+                    <span class="current-value">
+                        <b>Current Languages</b>
+                    </span>
+                    {{#each translator.languages}}
+                    <p>{{language}} -
+                        <span>{{level}}</span>
+                    </p>
+                    <input type="hidden" name="language" value="{{language}}">
+                    <input type="hidden" name="level" value="{{level}}"> {{/each}}
+                </div>
+
                 <div id="language-input-wrapper">
                     <label for="language">Add Language</label>
                     <select name="language" id="language">
@@ -121,7 +124,7 @@
                 <input id="preferedSetting" type="text" name="preferedSetting" placeholder="Describe your setting preferences here..." class="form-control">                --}}
                 <textarea cols="50" rows="3" name="preferedSetting">{{translator.preferedSetting}}</textarea>
             </div>
-            <div class="form-group">
+            <div class="form-group background">
                 <label for="background">Background</label>
                 <input id="background" type="text" name="background" class="form-control" value="{{translator.background}}">
             </div>
