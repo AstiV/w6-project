@@ -3,12 +3,12 @@
         <div class="col-sm-6 centered-form">
             <form action="/login" method="post">
                 <div class="form-group">
-                    <label for="username">Username</label>
+                    <label for="username"><b>Username</b></label>
                     <input type="text" name="username" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password"><b>Password</b></label>
                     <input type="password" name="password" class="form-control">
                 </div>
 
@@ -16,5 +16,7 @@
             </form>
         </div>
     </div>
-    <p>{{message}}</p>
+    <div class="error-msg">
+        <p>{{message}}</p>
+    </div>
 </div>
