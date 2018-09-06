@@ -18,7 +18,6 @@ router.get("/", (req, res) => {
   const role = req.user.role.toLowerCase();
   const query = {};
   query[req.user.role.toLowerCase()] = req.user._id;
-  // if (req.user.role === "WO") {
   Meeting.find(query).then(meetings => {
     if (meetings.length < 1) {
       res.render("meeting/index", {
@@ -27,10 +26,6 @@ router.get("/", (req, res) => {
     }
     res.render("meeting/index", { meetings });
   });
-  // }
-  //  else if (req.user.role === "Translator") {
-  //   Meeting
-  // }
 });
 
 router.post("/edit", (req, res) => {
