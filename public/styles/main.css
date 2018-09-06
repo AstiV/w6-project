@@ -43,6 +43,13 @@ input {
     color: var(--input-text);
 }
 
+button {
+    border-radius: 45px;
+    width: 14rem;
+    height: 4rem;
+    cursor: pointer;
+}
+
 .body-container {
     background-color: white;
     margin: 0 auto;
