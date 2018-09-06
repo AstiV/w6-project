@@ -2,30 +2,30 @@ const express = require("express");
 const router = express.Router();
 const Meeting = require("../models/Meeting");
 const User = require("../models/User");
+const WO = require("../models/WO");
+const Translator = require("../models/Translator");
 const { ensureLoggedIn, ensureLoggedOut } = require("connect-ensure-login");
 
-//use this middleware at every request to check if user is wo
+// use this middleware at every request to check if user is wo
 router.use((req, res, next) => {
   //if there is not a running session with a user
   if (!req.user) {
     res.render("index", { message: "You must be logged in to view this page" });
-  } else if (req.user.role !== "WO") {
-    res.render("index", {
-      message: "You must be logged in as Wellfare officer to create a meeting"
-    });
   } else {
     next();
   }
 });
 
 router.get("/", (req, res) => {
-  Meeting.find({}).then(meetings => {
+  const role = req.user.role.toLowerCase();
+  const query = {};
+  query[req.user.role.toLowerCase()] = req.user._id;
+  Meeting.find(query).then(meetings => {
     if (meetings.length < 1) {
       res.render("meeting/index", {
         message: "There are no meetings, please create one"
       });
     }
-
     res.render("meeting/index", { meetings });
   });
 });
@@ -107,7 +107,55 @@ router.get("/show/:id", (req, res) => {
     .catch(console.error);
 });
 router.get("/create", (req, res) => {
-  res.send("meeting create route");
+  // res.send("meeting create route");
+  if (req.user.role === "WO") {
+    res.render("meeting/create");
+  } else {
+    res.render("meeting/index", {
+      message: "You must be logged in as wo to create a meeting"
+    });
+  }
+});
+
+router.post("/create", (req, res) => {
+  const {
+    title,
+    woEmail,
+    translatorEmail,
+    participants,
+    caseInfo,
+    address,
+    date,
+    time
+  } = req.body;
+
+  User.findOne({ email: woEmail }).then(wo => {
+    User.findOne({ email: translatorEmail })
+      .then(translator => {
+        new Meeting({
+          title,
+          wo: wo._id,
+          translator: translator._id,
+          participants,
+          caseInfo,
+          address,
+          date,
+          time
+        })
+          .save()
+          .then(meeting => {
+            res.redirect("/meeting/");
+          })
+          .catch(err => {
+            res.send(err);
+          });
+      })
+      .catch(() => {
+        res.render("meeting/create", {
+          message: "The email you entered doesn't exist"
+        });
+      });
+  });
 });
 
 module.exports = router;
