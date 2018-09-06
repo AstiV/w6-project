@@ -1,16 +1,23 @@
 {{#if translator}}
+<h1>{{translator.user.name}}</h1>
 
-<div class="profile-wrapper">
+{{#if translator.profileImageUrl}}
+<div class="profile-img-wrapper">
+    <img class="profile-img" src="{{translator.profileImageUrl}}" alt="profile Image">
+</div>
+{{/if}}
+
+<p>Role: {{translator.role}}</p>
 
 
-    <div class="name-wrapper">
-        <h1>{{translator.user.username}}</h1>
-        <div class="btn-large">
-            <a class="btn-link" href="/profile/edit">Edit Profile</a>
-        </div>
-    </div>
+{{#if translator.isProfessional}}
+<p>Fee: € {{translator.price}}/hr</p>
+{{/if}}
+<p>Rating: {{translator.rating}}</p>
 
-
+<p>E-Mail: {{translator.user.email}}</p>
+<p>Phone Number: {{translator.telephone}}</p>
+<p>Location: {{translator.location}}</p>
 
     <div class="card-wrapper">
         <div class="card-wrapper-headline">
@@ -113,15 +120,7 @@
     </div>
 </div>
 
-
-
-
-
-
-
-
-
-
+<a href="/profile/edit">Edit Profile</a>
 
 {{/if}} {{#if wo}}
 <h1>Youth Welfare Officer Profile</h1>
@@ -131,6 +130,7 @@
 </div>
 {{/if}}
 
+<p>Name: {{wo.user.name}}</p>
 <p>Username: {{wo.user.username}}</p>
 <p>Role: Youth Welfare Officer</p>
 <p>E-Mail: {{wo.user.email}}</p>
