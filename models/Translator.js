@@ -23,9 +23,9 @@ const translatorSchema = Schema({
       level: { type: String, enum: ["A1", "A2", "B1", "B2", "C1", "C2"] }
     }
   ],
-  rating: { type: String, default: "0" },
+  rating: { type: Number, default: 0 },
   availability: String,
-  price: { type: String, default: "0" },
+  price: { type: Number, default: 0 },
   background: String, //relevant job experience for example
   preferedSetting: String //for example doesn't want to work with people who went through specific experiences
 });

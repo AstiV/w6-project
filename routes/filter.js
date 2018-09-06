@@ -33,12 +33,29 @@ router.get("/", (req, res) => {
 // })
 
 router.post("/results", (req, res) => {
-  const { language } = req.body;
-  const filterConditions = { ...req.body };
+  const { language, minRating } = req.body;
+  const filterConditions = [];
+
+  if (language) {
+    filterConditions.push({ "languages.language": language });
+  }
+
+  if (minRating) {
+    filterConditions.push({ rating: { $gte: parseInt(minRating) } });
+  }
+
   console.log(filterConditions);
-  Translator.find({ "languages.language": language }).then(translators => {
+
+  Translator.find({ $and: filterConditions }).then(translators => {
     console.log(translators);
-    res.render("filter/index", { translators });
+    if (translators.length > 0) {
+      res.render("filter/index", { translators });
+    } else {
+      res.render("filter/index", {
+        message:
+          "There are no translators that fit your search query. Please adjust it and try again."
+      });
+    }
   });
 });
 
