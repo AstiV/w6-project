@@ -24,11 +24,25 @@ const users = [
     name: "Afolabi Taavi"
   },
   {
+    email: "test@volunteer1.com",
+    password: bcrypt.hashSync("test", bcrypt.genSaltSync(8), null),
+    username: "testvolunteer1",
+    role: "Translator",
+    name: "Eadric Sahib"
+  },
+  {
     email: "test@professional.com",
     password: bcrypt.hashSync("test", bcrypt.genSaltSync(8), null),
     username: "testprofessional",
     role: "Translator",
     name: "Gadisse Nehi"
+  },
+  {
+    email: "test@professional1.com",
+    password: bcrypt.hashSync("test", bcrypt.genSaltSync(8), null),
+    username: "testprofessional",
+    role: "Translator",
+    name: "Virgil Pekka"
   }
 ];
 
@@ -82,6 +96,48 @@ User.create(users, err => {
       availability: "Mondays from 14.00",
       background: "Doctor, Father of 2 daughters",
       preferedSetting: "No preferences"
+    };
+
+    Translator.create(newTranslator, err => {
+      if (err) throw err;
+      console.log(`Created one translator`);
+    });
+  });
+
+  User.findOne({ email: "test@volunteer1.com" }).then(translator => {
+    const newTranslator = {
+      user: translator.id,
+      telephone: "1234-5678",
+      role: "Volunteer",
+      profileImageUrl:
+        "https://res.cloudinary.com/adiya/image/upload/v1536243616/profilepicprofessional.jpg",
+      location: "Hamburg",
+      languages: [{ language: "Wolof", level: "C1" }],
+      rating: 3,
+      availability: "All day on Tuesday",
+      background: "Lawyer",
+      preferedSetting: "No traumatic topics"
+    };
+
+    Translator.create(newTranslator, err => {
+      if (err) throw err;
+      console.log(`Created one translator`);
+    });
+  });
+
+  User.findOne({ email: "test@professional1.com" }).then(translator => {
+    const newTranslator = {
+      user: translator.id,
+      telephone: "1234-5678",
+      role: "Professional",
+      profileImageUrl:
+        "https://res.cloudinary.com/adiya/image/upload/v1536243679/profilepicvolunteer.jpg",
+      location: "München",
+      languages: [{ language: "Dari", level: "C1" }],
+      rating: 4,
+      availability: "All day on Tuesday",
+      background: "Professional translator, Lived 10 years on Madagascar",
+      preferedSetting: "No special preferrences"
     };
 
     Translator.create(newTranslator, err => {
