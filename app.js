@@ -24,6 +24,13 @@ const profileRouter = require("./routes/profile");
 const meetingRouter = require("./routes/meeting");
 const filterRouter = require("./routes/filter");
 
+//utils
+const {
+  createTranslator,
+  createUser,
+  createWO
+} = require("./utils/userCreation");
+
 //MONGO SETUP
 //connect to MongoDB
 mongoose.connect(
@@ -60,7 +67,6 @@ app.set("view engine", "hbs");
 passport.use(
   "local-login",
   new LocalStrategy((username, password, next) => {
-    //TODO ADD AUTH WITH EMAIL
     User.findOne({ username }, (err, user) => {
       if (err) {
         return next(err);
@@ -96,45 +102,25 @@ passport.use(
               return next(null, false);
             } else {
               // Destructure the body
-              const { username, email, password, role } = req.body;
-              const hashPass = bcrypt.hashSync(
-                password,
-                bcrypt.genSaltSync(8),
-                null
-              );
-              const newUser = new User({
-                username,
-                email,
-                password: hashPass,
-                role
-              });
+              const { username, email, password, role, name } = req.body;
 
-              newUser.save(err => {
-                if (err) {
-                  next(null, false, { message: newUser.errors });
-                }
-                if (role === "WO") {
-                  User.find({ email }).then(user => {
-                    new WO({
-                      user: user[0]._id
-                    })
-                      .save()
-                      .then(result => {
-                        return next(null, result);
+              createUser({ username, email, password, role, name }).then(
+                user => {
+                  if (user.role === "Translator") {
+                    User.findOne({ email }).then(user => {
+                      createTranslator(user._id).then(newUser => {
+                        return next(null, newUser);
                       });
-                  });
-                } else if (role === "Translator") {
-                  User.find({ email }).then(user => {
-                    new Translator({
-                      user: user[0]._id
-                    })
-                      .save()
-                      .then(result => {
-                        return next(null, result);
+                    });
+                  } else if (user.role === "WO") {
+                    User.findOne({ email }).then(user => {
+                      createWO(user._id).then(newUser => {
+                        return next(null, newUser);
                       });
-                  });
+                    });
+                  }
                 }
-              });
+              );
             }
           }
         );
@@ -153,8 +139,8 @@ passport.deserializeUser((id, cb) => {
       return cb(err);
     }
 
-    const cleanUser = user.toObject();
-    delete cleanUser.password;
+    // const cleanUser = user.toObject();
+    // delete cleanUser.password;
 
     cb(null, user);
   });

@@ -86,4 +86,24 @@ describe("Field formatter", () => {
     };
     expect(formatFields(input)).toEqual(output);
   });
+  test("should save edit fields to DB", () => {
+    const input = {
+      username: "newUser",
+      email: "bob@test.com",
+      telephone: "",
+      background: "some new background info",
+      preferedSetting: "Some preferred setting, sedfghj"
+    };
+    const output = {
+      translatorModelFields: {
+        background: "some new background info",
+        preferedSetting: "Some preferred setting, sedfghj"
+      },
+      userModelFields: {
+        username: "newUser",
+        email: "bob@test.com"
+      }
+    };
+    expect(formatFields(input)).toEqual(output);
+  });
 });
