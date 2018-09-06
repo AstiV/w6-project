@@ -53,7 +53,7 @@ button {
 .body-container {
     background-color: white;
     margin: 0 auto;
-    width: 90vw;
+    width: 85vw;
     height: 100%;
     padding: 5rem;
 }
@@ -170,25 +170,40 @@ nav a {
     margin-right: 10px;
 }
 
+.list-wrapper {
+    height: 70%;
+    padding: 13% 0 0 7%;
+}
+
 .list .tag {
     margin-right: 10px;
-    padding: 7px;
-    border: 1.5px solid rgb(229, 229, 229);
-    width: 50%;
+    margin-top: 50px;
+    padding: 2px 20px;
+    border: 1.5px solid var(--card-border);
+    border-radius: 45px;
 }
 
 .form-wrapper {
-    width: 90%;
-    height: 60vh;
+    width: 100%;
+    height: 100%;
     margin: 30px 0 0 30px;
-    margin-bottom: 2%;
     border: 1px solid #e5e5e5;
     border-radius: 5px;
-    padding: 25px 40px;
+    /* padding: 25px 40px; */
     background-color: var(--background-grey-color);
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.form-wrapper-headline {
+    width: 100%;
+    border-bottom: 1.5px solid rgb(229, 229, 229);
+    margin-bottom: 1%;
+}
+
+.form-group-wrapper {
+    margin: 20px;
 }
 
 .form-group {
@@ -206,4 +221,27 @@ nav a {
     border: 1px solid var(--card-border);
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+.submit-wrapper {
+    text-align: center;
+    margin: 30px;
+}
+
+.form-wrapper-headline {
+    border-bottom: 1.5px solid rgb(229, 229, 229);
+    padding: 3%;
+    margin-bottom: 1%;
+}
+
+.current-value-wrapper {
+    margin-bottom: 20px;
+}
+
+.language-input-wrapper {
+    width: 500px;
+}
+
+.form-group.background {
+    margin-top: 30px;
 }
