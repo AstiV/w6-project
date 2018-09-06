@@ -12,20 +12,20 @@
 
 
 
-    {{!-- {{#if translator.profileImageUrl}}
-    <div class="profile-img-wrapper">
-        <img class="profile-img" src="{{translator.profileImageUrl}}" alt="profile Image">
-    </div>
-    {{/if}} --}}
-
     <div class="card-wrapper">
         <div class="card-wrapper-headline">
             <h2>General Information</h2>
         </div>
-        <div class="info-wrapper">
+        <div class="general-wrapper">
+            {{#if translator.profileImageUrl}}
+            <div class="profile-img-wrapper">
+                <img class="profile-img" src="{{translator.profileImageUrl}}" alt="profile Image">
+            </div>
+            {{/if}} {{!--
             <div class="image-wrapper">
                 <div class="image-placeholder"></div>
             </div>
+            --}}
             <div class="info-text-wrapper">
                 <div class="info-item">
                     <p><b>Role</b></p>
@@ -34,8 +34,8 @@
 
                 {{#if isProfessional}}
                 <div class="info-item">
-                    <p><b>Fee</b></p>
-                    <p> € {{translator.price}} /hr </p>
+                    <p><b>Fee (per hour)</b></p>
+                    <p> € {{translator.price}}</p>
                 </div>
                 {{/if}}
                 <div class="info-item">
@@ -55,9 +55,11 @@
                 <p><b>Location</b></p>
                 <p>{{translator.location}}</p>
             </div>
-            <div class="contact-mail-phone">
+            <div class="contact-mail">
                 <p><b>E-Mail</b></p>
                 <p>{{translator.user.email}}</p>
+            </div>
+            <div class="contact-phone">
                 <p><b>Phone</b></p>
                 <p>{{translator.telephone}}</p>
             </div>
@@ -68,10 +70,17 @@
         <div class="card-wrapper-headline">
             <h2>Languages</h2>
         </div>
-        <div class="list-wrapper">
+        <div class="info-wrapper">
             <ul class="list">
                 {{#each translator.languages}}
-                <li>{{this.language}} Level: {{this.level}}</li>
+                <div class="list-language">
+                    <p><b>Language</b></p>
+                    <li>{{this.language}}</li>
+                </div>
+                <div class="list-level">
+                    <p><b>Level</b></p>
+                    <li>{{this.level}}</li>
+                </div>
                 {{/each}}
             </ul>
         </div>
@@ -81,10 +90,10 @@
         <div class="card-wrapper-headline">
             <h2>Background</h2>
         </div>
-        <div class="tag-wrapper">
-            <ul class="tag-list">
+        <div class="info-wrapper">
+            <ul class="list">
                 {{#each translator.background}}
-                <li>{{this}}</li>
+                <li class="tag">{{this}}</li>
                 {{/each}}
             </ul>
         </div>
@@ -94,8 +103,8 @@
         <div class="card-wrapper-headline">
             <h2>Preferred Setting</h2>
         </div>
-        <div class="setting-wrapper">
-            <ul class="setting-list">
+        <div class="info-wrapper">
+            <ul class="list setting">
                 {{#each translator.preferedSetting}}
                 <li>{{this}}</li>
                 {{/each}}

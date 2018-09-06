@@ -104,7 +104,7 @@ nav a {
     margin-bottom: 1%;
 }
 
-.info-wrapper {
+.general-wrapper {
     padding: 3% 0 0 4%;
     display: flex;
 }
@@ -117,13 +117,39 @@ nav a {
     margin-bottom: 6%;
 }
 
-.image-placeholder {
+.profile-img {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    background-color: var(--main-primary-color);
 }
 
-/* .info-wrapper {
+.info-wrapper {
+    height: 70%;
+    padding: 13% 0 0 7%;
     display: flex;
-} */
+}
+
+.contact-mail {
+    margin: 0 10%;
+}
+
+.list {
+    list-style: none;
+    display: flex;
+    padding: 0;
+}
+
+.list-language {
+    margin-right: 10px;
+}
+
+.list-level {
+    margin-right: 10px;
+}
+
+.list .tag {
+    margin-right: 10px;
+    padding: 7px;
+    border: 1.5px solid rgb(229, 229, 229);
+    width: 50%;
+}
