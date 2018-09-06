@@ -1,22 +1,150 @@
+<style>
+    .Waiting {
+        background-color: var(--color-waiting);
+    }
+
+    .Confirmed {
+        background-color: var(--color-confirmed);
+    }
+
+    .Cancelled {
+        background-color: var(--color-cancelled);
+    }
+
+    .status {
+        width: 12rem;
+        text-align: center;
+        border-radius: 5px;
+        padding: .5rem 2rem;
+        margin: 30px 0;
+    }
+
+    .details {
+        margin: 40px 0;
+    }
+
+    .details a {
+        text-decoration: none;
+        color: var(--headline-text);
+    }
+
+    .case-info-wrapper {
+        display: flex;
+    }
+
+    .info-card-datetime {
+        width: 330px;
+        margin: 0 80px 0 30px;
+        padding: 3rem 2rem 1.5rem 4rem;
+        border: 1.5px solid var(--card-border);
+        border-radius: 0 0 5px 5px;
+    }
+
+    .info-card-about {
+        width: 750px;
+        padding: 3rem 2rem;
+        border: 1.5px solid var(--card-border);
+        border-radius: 0 0 5px 5px;
+    }
+
+    .case-info {
+        margin-bottom: 6%
+    }
+
+    .edit-meeting-btn {
+        border-radius: 45px;
+        width: 25rem;
+        height: 4rem;
+        cursor: pointer;
+        text-decoration: none;
+        border: 2px solid var(--card-border);
+        padding: 0.5rem 7rem;
+        color: #000000;
+    }
+
+    .edit-meeting-btn:hover {
+        background-color: var(--background-grey-color);
+    }
+
+    .edit-meeting-btn:active {
+        box-shadow: 0 1px rgba(102, 102, 102, 0.2);
+        transform: translateY(0.5px);
+    }
+
+
+    .case-title a {
+        font-size: 2.2rem;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .case-title a::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+    }
+
+    .meeting-overview-header {
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
+
 {{message}}
 
-<h1>Plan Aid Meeting: {{meeting.title}}</h1>
+<div class="meeting-overview-header">
+    <h1>Plan Aid Meeting: {{meeting.title}}</h1>
+    <a class="edit-meeting-btn" href="/meeting/edit/{{meeting._id}}">Edit Meeting</a>
+</div>
 
-<p>{{meeting.status}}</p>
+<p class="{{meeting.status}} status">{{meeting.status}}</p>
 
-<p>{{meeting.date}}</p>
-<p>{{meeting.time}}</p>
-<p>{{meeting.address}}</p>
-<p>{{meeting.caseInfo}}</p>
+<div class="case-info-wrapper">
+    <div class="info-card-datetime">
+        <div class="case-info">
+            <p><b>Date</b></p>
+            <p>{{meeting.date}}</p>
+        </div>
+        <div class="case-info">
+            <p><b>Time</b></p>
+            <p>{{meeting.time}}</p>
+        </div>
+        <div class="case-info">
+            <p><b>Location</b></p>
+            <p>{{meeting.address}}</p>
+        </div>
+    </div>
 
-<p>Participants</p>
-<p>Wellfare officer - {{meeting.wo.name}} - {{meeting.woStatus}}</p>
-<p>Translator - {{meeting.translator.name}} - {{meeting.translatorStatus}}</p>
-<p>Other participants</p>
-{{#each meeting.participants}}
-<li>{{this}}</li>
-{{/each}}
+    <div class="info-card-about">
+        <p><b>About this Case</b></p>
+        <p>{{meeting.caseInfo}}</p>
+    </div>
+</div>
+
+
+<div class="card-wrapper">
+    <div class="card-wrapper-headline">
+        <h2>Participants</h2>
+    </div>
+
+    <p>Youth Welfare Officer</p>
+    <p>{{meeting.wo.name}}</p>
+
+    {{meeting.woStatus}}
+    </p>
+    <p>Translator - {{meeting.translator.name}} - {{meeting.translatorStatus}}</p>
+
+
+    <p>Other participants</p>
+    {{#each meeting.participants}}
+    <li>{{this}}</li>
+    {{/each}}
+</div>
+
 
 <button type="button">Send Reminder</button>
 <button type="button">Pay Translator</button>
-<a href="/meeting/edit/{{meeting._id}}">Edit Meeting</a>
