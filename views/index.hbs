@@ -1,2 +1,140 @@
+<style>
+    .index-wrapper {}
+
+    .hidden {
+        visibility: hidden;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        height: 80vh;
+    }
+
+    .header .heading {
+        text-align: right;
+        margin-right: 3rem;
+    }
+
+    .header span {
+        display: block;
+        font-size: 3rem;
+        color: black;
+        font-weight: 300;
+    }
+
+    .header .logo {
+        color: black;
+        font-size: 4rem;
+    }
+
+    .header img {
+        width: 50rem;
+        height: 45%;
+    }
+
+    .benefits-wrapper {
+        background-color: rgba(202, 200, 240, 0.349);
+        height: 80vh;
+        width: 99vw;
+        margin-left: -11rem;
+        padding: 10rem;
+    }
+
+    .benefits-wrapper h2 {
+        color: black;
+        text-align: center;
+        margin-bottom: 6rem;
+    }
+
+    .benefits {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .benefits * {
+        margin-bottom: 1rem;
+    }
+
+    .benefits div {
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    ul {
+        margin: 0;
+    }
+
+    ul.dashed {
+        list-style-type: none;
+    }
+
+    ul.dashed>li {
+        text-indent: -5px;
+    }
+
+    ul.dashed>li:before {
+        content: "\2014         ";
+        text-indent: -5px;
+    }
+
+    .benefits div img {
+        width: 10rem;
+    }
+</style>
+
 <p>{{message}}</p>
-<h1>Index page</h1>
+
+<div class="index-wrapper">
+    <div class="header">
+        <h1 class="heading">
+            <span class="logo">translatorcon</span>
+            <span>Connect to speakers of Central African languages</span>
+        </h1>
+        <img src="https://landing.moqups.com/0.1.69/img/illustrations/illu3@2x.png" alt="">
+    </div>
+
+    <div class="benefits-wrapper">
+        <h2>Benefits for both sides</h2>
+        <div class="benefits">
+            <div>
+                <img src="/icons/budget.svg" alt="">
+                <p>Total transparency</p>
+                <ul class="dashed">
+                    <li>Budget</li>
+                    <li>Translator rating</li>
+                </ul>
+            </div>
+            <div>
+                <img src="/icons/connect.svg" alt="">
+                <p>Connect to speakers</p>
+                <ul class="dashed">
+                    <li>In your proximity</li>
+                    <li>All over Germany</li>
+                </ul>
+            </div>
+            <div>
+                <img src="/icons/rating.svg" alt="">
+                <p>Decide about the details</p>
+                <ul class="dashed">
+                    <li>Translators:
+                        <br> Specify your preferred setting</li>
+                    <li>Youth Welfare officers:
+                        <br> Choose background that fits the situation</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>
+
+<script>
+    const navbar = Array.from(document.getElementsByClassName("nav-profile"))
+    navbar[0].classList += " hidden"
+</script>
