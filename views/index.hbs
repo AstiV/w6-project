@@ -1,2 +1,138 @@
+<style>
+    .index-wrapper {}
+
+    .hidden {
+        visibility: hidden;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        height: 80vh;
+    }
+
+    .header .heading {
+        text-align: right;
+        margin-right: 3rem;
+    }
+
+    .header span {
+        display: block;
+        font-size: 3rem;
+        color: black;
+        font-weight: 300;
+    }
+
+    .header .logo {
+        color: black;
+        font-size: 4rem;
+    }
+
+    .header img {
+        width: 50rem;
+        height: 45%;
+    }
+
+    .benefits-wrapper {
+        background-color: rgba(202, 200, 240, 0.349);
+        height: 80vh;
+        width: 99vw;
+        margin-left: -11rem;
+        padding: 10rem;
+    }
+
+    .benefits-wrapper h2 {
+        color: black;
+        text-align: center;
+        margin-bottom: 6rem;
+    }
+
+    .benefits {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .benefits * {
+        margin-bottom: 1rem;
+    }
+
+    .benefits .benefits-card {
+        width: 28%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .benefits .list-header {
+        font-size: 2rem;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .benefits .benefits-text {
+        width: 100%;
+    }
+
+    .benefits li {
+        list-style: none;
+    }
+
+
+    .benefits div img {
+        width: 7rem;
+    }
+</style>
+
 <p>{{message}}</p>
-<h1>Index page</h1>
+
+<div class="index-wrapper">
+    <div class="header">
+        <h1 class="heading">
+            <span class="logo">translatorcon</span>
+            <span>Connect to speakers of Central African languages</span>
+        </h1>
+        <img src="https://landing.moqups.com/0.1.69/img/illustrations/illu3@2x.png" alt="">
+    </div>
+
+    <div class="benefits-wrapper">
+        <h2>Benefits for both sides</h2>
+        <div class="benefits">
+            <div class="benefits-card">
+                <img src="/icons/budget.svg" alt="">
+                <div class="benefits-text">
+                    <p class="list-header">Total transparency</p>
+                    <p>Decide on your budget and search for speakers that are in the price range</p>
+                    <p>See translator rating to decide who you want to work with</p>
+                </div>
+            </div>
+
+            <div class="benefits-card">
+                <img src="/icons/rating.svg" alt="">
+                <div class="benefits-text">
+                    <p class="list-header">Translators </p>
+                    <p>Specify your preferred setting</p>
+                    <p>Decide what topics you want to deal with</p>
+                </div>
+            </div>
+            <div class="benefits-card">
+                <img src="/icons/connect.svg" alt="">
+                <div class="benefits-text">
+                    <p class="list-header">Youth Welfare officers</p>
+                    <p>Choose a translator with a background that fits the situation</p>
+                    <p>Manage all aid planning meetings in one place</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>
+
+<script>
+    const navbar = Array.from(document.getElementsByClassName("nav-profile"))
+    navbar[0].classList += " hidden"
+</script>

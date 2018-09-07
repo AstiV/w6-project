@@ -9,7 +9,8 @@ const translatorSchema = Schema({
     autopopulate: true
   },
   profileImageUrl: {
-    type: String
+    type: String,
+    default: "https://tinyurl.com/y78vuo7x"
   },
   role: {
     type: String,
