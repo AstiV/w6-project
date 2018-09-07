@@ -48,6 +48,16 @@ button {
     width: 14rem;
     height: 4rem;
     cursor: pointer;
+    outline: 0 none;
+}
+
+button:hover {
+    background-color: var(--background-grey-color);
+}
+
+button:active {
+    box-shadow: 0 3px rgba(102, 102, 102, 0.2);
+    transform: translateY(0.3px);
 }
 
 .body-container {
