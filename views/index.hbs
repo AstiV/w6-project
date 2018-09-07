@@ -56,33 +56,30 @@
         margin-bottom: 1rem;
     }
 
-    .benefits div {
-        width: 30%;
+    .benefits .benefits-card {
+        width: 25%;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
     }
 
-    ul {
-        margin: 0;
+    .benefits .list-header {
+        font-size: 2rem;
+        font-weight: 700;
     }
 
-    ul.dashed {
-        list-style-type: none;
+    .benefits .benefits-text {
+        width: 100%;
     }
 
-    ul.dashed>li {
-        text-indent: -5px;
+    .benefits li {
+        list-style: none;
     }
 
-    ul.dashed>li:before {
-        content: "\2014         ";
-        text-indent: -5px;
-    }
 
     .benefits div img {
-        width: 10rem;
+        width: 7rem;
     }
 </style>
 
@@ -100,31 +97,31 @@
     <div class="benefits-wrapper">
         <h2>Benefits for both sides</h2>
         <div class="benefits">
-            <div>
+            <div class="benefits-card">
                 <img src="/icons/budget.svg" alt="">
-                <p>Total transparency</p>
-                <ul class="dashed">
-                    <li>Budget</li>
-                    <li>Translator rating</li>
-                </ul>
+                <div class="benefits-text">
+                    <p class="list-header">Total transparency</p>
+                    <p>Decide on your budget and search for speakers that are in the price range</p>
+                    <p>See translator rating to decide who you want to work with</p>
+                </div>
             </div>
-            <div>
-                <img src="/icons/connect.svg" alt="">
-                <p>Connect to speakers</p>
-                <ul class="dashed">
-                    <li>In your proximity</li>
-                    <li>All over Germany</li>
-                </ul>
-            </div>
-            <div>
+
+            <div class="benefits-card">
                 <img src="/icons/rating.svg" alt="">
-                <p>Decide about the details</p>
-                <ul class="dashed">
-                    <li>Translators:
-                        <br> Specify your preferred setting</li>
-                    <li>Youth Welfare officers:
-                        <br> Choose background that fits the situation</li>
-                </ul>
+                <div class="benefits-text">
+                    <p class="list-header">Translators </p>
+                    <p>Specify your preferred setting</p>
+                    <p>Decide what topics you want to deal with</p>
+                </div>
+            </div>
+            <div class="benefits-card">
+                <img src="/icons/connect.svg" alt="">
+                <div class="benefits-text">
+                    <p class="list-header">Youth Welfare officers</p>
+                    <p>Choose a translator with a background that fits the situation</p>
+                    <p>Manage all aid planning meetings in one place</p>
+                </div>
+
             </div>
 
         </div>
