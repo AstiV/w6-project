@@ -6,7 +6,21 @@ const Translator = require("../models/Translator");
 
 router.get("/", (req, res) => {
   Translator.find({}).then(translators => {
-    res.render("filter/index", { translators });
+    // console.log(translators);
+
+    const locations = Array.from(translators).map(translator => {
+      // console.log(translator.location);
+      // console.log(typeof JSON.stringify(translator.location));
+      if (typeof JSON.stringify(translator.location) !== "undefined") {
+        console.log(translator.location);
+
+        return translator.location;
+      }
+    });
+
+    console.log(locations);
+
+    res.render("filter/index", { translators, locations });
   });
 });
 
