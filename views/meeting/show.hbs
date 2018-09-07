@@ -48,7 +48,11 @@
     }
 
     .case-info {
-        margin-bottom: 6%
+        margin-bottom: 6%;
+    }
+
+    .participant-case-info {
+        margin-bottom: 2.5%;
     }
 
     .edit-meeting-btn {
@@ -92,6 +96,31 @@
         display: flex;
         justify-content: space-between;
     }
+
+    .meeting-card-wrapper {
+        width: 70%;
+        margin: 2% 15%;
+        border: 1.5px solid #e5e5e5;
+        border-top: 2.5px solid coral;
+        border-radius: 0 0 5px 5px;
+    }
+
+    .paricipants-wrapper {
+        width: 80%;
+        margin: 20px;
+    }
+
+    .participant-list {
+        list-style: none;
+    }
+
+    span.status {
+        margin-left: 30%;
+    }
+
+    .buttons {
+        margin-left: 30%;
+    }
 </style>
 
 {{message}}
@@ -105,15 +134,15 @@
 
 <div class="case-info-wrapper">
     <div class="info-card-datetime">
-        <div class="case-info">
+        <div class="participant-case-info">
             <p><b>Date</b></p>
             <p>{{meeting.date}}</p>
         </div>
-        <div class="case-info">
+        <div class="participant-case-info">
             <p><b>Time</b></p>
             <p>{{meeting.time}}</p>
         </div>
-        <div class="case-info">
+        <div class="participant-case-info">
             <p><b>Location</b></p>
             <p>{{meeting.address}}</p>
         </div>
@@ -126,25 +155,33 @@
 </div>
 
 
-<div class="card-wrapper">
+<div class="meeting-card-wrapper">
     <div class="card-wrapper-headline">
         <h2>Participants</h2>
     </div>
 
-    <p>Youth Welfare Officer</p>
-    <p>{{meeting.wo.name}}</p>
+    <div class="paricipants-wrapper">
+        <div class="case-info">
+            <p><b>Youth Welfare Officer</b></p>
+            <span>{{meeting.wo.name}}</span>
+            <span class="{{meeting.status}} status">{{meeting.woStatus}}</span>
+        </div>
+        <div class="case-info">
+            <p><b>Translator</b><p>
+                    <span>{{meeting.translator.name}}</span>
+                    <span class="{{meeting.status}} status">{{meeting.translatorStatus}}</span>
 
-    {{meeting.woStatus}}
-    </p>
-    <p>Translator - {{meeting.translator.name}} - {{meeting.translatorStatus}}</p>
-
-
-    <p>Other participants</p>
-    {{#each meeting.participants}}
-    <li>{{this}}</li>
-    {{/each}}
+        </div>
+        <div class="case-info">
+            <p><b>Other participants</b></p>
+            {{#each meeting.participants}}
+            <li class="participant-list">{{this}}</li>
+            {{/each}}
+        </div>
+    </div>
 </div>
 
-
-<button type="button">Send Reminder</button>
-<button type="button">Pay Translator</button>
+<div class="buttons">
+    <button type="button">Send Reminder</button>
+    <button type="button">Pay Translator</button>
+</div>
