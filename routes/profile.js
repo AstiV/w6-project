@@ -35,18 +35,15 @@ router.get("/show", (req, res) => {
   } else if (req.user.role === "Translator") {
     Translator.findOne({ user: id }).then(translatorRaw => {
       let translator = { ...translatorRaw }._doc;
-      if (
-        translator.background.includes(",") &&
-        translator.preferedSetting.includes(",")
-      ) {
+
+      if (translator.background) {
         translator.background = translator.background.split(", ");
+      }
+
+      if (translator.preferedSetting) {
         translator.preferedSetting = translator.preferedSetting.split(", ");
       }
-      if (translator.background.includes(",")) {
-        translator.background = translator.background.split(", ");
-      } else if (translator.preferedSetting.includes(",")) {
-        translator.preferedSetting = translator.preferedSetting.split(", ");
-      }
+
       res.render("profile/show", {
         translator,
         isProfessional: translator.role === "Professional"
