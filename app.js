@@ -17,7 +17,6 @@ const flash = require("connect-flash");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
-require("dotenv").config();
 
 //routes
 const authRouter = require("./routes/auth");
