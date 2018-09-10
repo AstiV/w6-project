@@ -25,128 +25,137 @@ const meetingRouter = require("./routes/meeting");
 const filterRouter = require("./routes/filter");
 
 //utils
-const { createTranslator, createUser, createWO } = require("./utils/userCreation");
+const {
+  createTranslator,
+  createUser,
+  createWO
+} = require("./utils/userCreation");
 
-//MONGO SETUP
-//connect to MongoDB
-mongoose.connect(
-    process.env.MONGODB_URI || "mongodb://localhost/translations",
+module.exports = ({ dbName, port }) => {
+  //MONGO SETUP
+  //connect to MongoDB
+  mongoose.connect(
+    dbName,
     { useNewUrlParser: true }
-);
+  );
 
-//serves all files from translations-client/public folder through "/"
-app.use(express.static(path.join(__dirname, "/public")));
+  //serves all files from translations-client/public folder through "/"
+  app.use(express.static(path.join(__dirname, "/public")));
 
-//Save sessions so that there is no need
-//to constantly log in when server is restarted
-app.use(
+  //Save sessions so that there is no need
+  //to constantly log in when server is restarted
+  app.use(
     session({
-        secret: "translations",
-        resave: false,
-        saveUninitialized: true,
-        store: new MongoStore({ mongooseConnection: mongoose.connection })
+      secret: "translations",
+      resave: false,
+      saveUninitialized: true,
+      store: new MongoStore({ mongooseConnection: mongoose.connection })
     })
-);
-app.use(flash());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+  );
+  app.use(flash());
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(cookieParser());
-// app.use(fileUpload());
+  app.use(cookieParser());
+  // app.use(fileUpload());
 
-//VIEW ENGINE SETUP
-app.set("views", path.join(__dirname, "/views"));
-app.set("view engine", "hbs");
+  //VIEW ENGINE SETUP
+  app.set("views", path.join(__dirname, "/views"));
+  app.set("view engine", "hbs");
 
-//PASSPORT SETUP
+  //PASSPORT SETUP
 
-passport.use(
+  passport.use(
     "local-login",
     new LocalStrategy((username, password, next) => {
-        User.findOne({ username }, (err, user) => {
-            if (err) {
-                return next(err);
-            }
-            if (!user) {
-                return next(null, false, { message: "Incorrect username" });
-            }
-            if (!bcrypt.compareSync(password, user.password)) {
-                return next(null, false, { message: "Incorrect password" });
-            }
-            return next(null, user);
-        });
+      User.findOne({ username }, (err, user) => {
+        if (err) {
+          return next(err);
+        }
+        if (!user) {
+          return next(null, false, { message: "Incorrect username" });
+        }
+        if (!bcrypt.compareSync(password, user.password)) {
+          return next(null, false, { message: "Incorrect password" });
+        }
+        return next(null, user);
+      });
     })
-);
+  );
 
-passport.use(
+  passport.use(
     "local-signup",
-    new LocalStrategy({ passReqToCallback: true }, (req, username, password, next) => {
+    new LocalStrategy(
+      { passReqToCallback: true },
+      (req, username, password, next) => {
         // To avoid race conditions
         process.nextTick(() => {
-            User.findOne(
-                {
-                    username: username
-                },
-                (err, user) => {
-                    if (err) {
-                        return next(err);
-                    }
+          User.findOne(
+            {
+              username: username
+            },
+            (err, user) => {
+              if (err) {
+                return next(err);
+              }
 
-                    if (user) {
-                        return next(null, false);
-                    } else {
-                        // Destructure the body
-                        const { username, email, password, role, name } = req.body;
+              if (user) {
+                return next(null, false);
+              } else {
+                // Destructure the body
+                const { username, email, password, role, name } = req.body;
 
-                        createUser({ username, email, password, role, name }).then(user => {
-                            if (user.role === "Translator") {
-                                User.findOne({ email }).then(user => {
-                                    createTranslator(user._id).then(newUser => {
-                                        return next(null, newUser);
-                                    });
-                                });
-                            } else if (user.role === "WO") {
-                                User.findOne({ email }).then(user => {
-                                    createWO(user._id).then(newUser => {
-                                        return next(null, newUser);
-                                    });
-                                });
-                            }
+                createUser({ username, email, password, role, name }).then(
+                  user => {
+                    if (user.role === "Translator") {
+                      User.findOne({ email }).then(user => {
+                        createTranslator(user._id).then(newUser => {
+                          return next(null, newUser);
                         });
+                      });
+                    } else if (user.role === "WO") {
+                      User.findOne({ email }).then(user => {
+                        createWO(user._id).then(newUser => {
+                          return next(null, newUser);
+                        });
+                      });
                     }
-                }
-            );
+                  }
+                );
+              }
+            }
+          );
         });
-    })
-);
+      }
+    )
+  );
 
-passport.serializeUser((user, cb) => {
+  passport.serializeUser((user, cb) => {
     cb(null, user._id);
-});
+  });
 
-passport.deserializeUser((id, cb) => {
+  passport.deserializeUser((id, cb) => {
     User.findById(id, (err, user) => {
-        if (err) {
-            return cb(err);
-        }
+      if (err) {
+        return cb(err);
+      }
 
-        // const cleanUser = user.toObject();
-        // delete cleanUser.password;
+      // const cleanUser = user.toObject();
+      // delete cleanUser.password;
 
-        cb(null, user);
+      cb(null, user);
     });
-});
+  });
 
-app.use(passport.initialize());
-app.use(passport.session());
+  app.use(passport.initialize());
+  app.use(passport.session());
 
-app.use("/", authRouter);
-app.use("/profile", profileRouter);
-app.use("/meeting", meetingRouter);
-app.use("/filter", filterRouter);
+  app.use("/", authRouter);
+  app.use("/profile", profileRouter);
+  app.use("/meeting", meetingRouter);
+  app.use("/filter", filterRouter);
 
-app.listen(process.env.PORT || 3000, () => {
+  return app.listen(port, () => {
     console.log(`server starting on port 3000`);
-});
-
-module.exports = app;
+  });
+};
