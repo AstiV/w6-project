@@ -1,4 +1,4 @@
-# translatorcon - connect Translators of Central African Languages to Youth Welfare Officers
+# translatorcon - Connect Translators of Central African Languages to Youth Welfare Officers
 
 Speakers of certain Central African Languages are rare to find in Germany.
 Youth welfare officers spend vast amounts of time to research for either professionals or volunteers to translate on aid plan meetings with unaccompanied asylum-seeking minors.
