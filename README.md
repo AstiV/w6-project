@@ -19,3 +19,5 @@ Translatorcon tackles the problem by a centralized platform to connect both part
 This setup is ready to deploy to Heroku.
 Simply connect your gitHub repository to Heroku and trigger a deployment or activate automatic deploys.
 Do not forget to install the mlab plugin in Heroku!
+
+#### Visit https://translatorcon.herokuapp.com/
